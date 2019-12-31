@@ -185,7 +185,7 @@ $(document).ready(function(){
       value:row.support_document_id
 
     });
-      url = 'update_Propierty/'+row.id;
+      url = 'actualizar_propiedad/'+row.id;
     }
   }
 

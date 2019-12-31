@@ -119,7 +119,6 @@ class PropiertiesController extends Controller
       $requestData=$request->all();
       $propierty=Propierty::findOrfail($id);
       $propierty->update($requestData);
-
       if($request->images){
         $destinationPath = public_path('images');
         $images= $request->images;
