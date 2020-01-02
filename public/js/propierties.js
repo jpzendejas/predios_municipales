@@ -188,8 +188,58 @@ $(document).ready(function(){
       url = 'actualizar_propiedad/'+row.id;
     }
   }
+  var viewPropierty = function(){
+
+  var row = $('#dg').datagrid('getSelected');
+  if (row) {
+    $('#dd').dialog({
+    title: 'My Dialog',
+    width: 700,
+    height: 350,
+    closed: false,
+    cache: false,
+    modal: true
+    });
+    $.ajax({
+      method:'GET',
+      dataType:'json',
+      url:"/obterner_predio/"+row.id,
+      data:{'id':row.id},
+      success: function(response){
+        $.each(response, function(index, value){
+          $('#lista').append('<label>Numero de Inventario: <strong>'+value.inventory_number+'</strong></label>');
+          $('#lista').append('<br><label>Dirección: <strong>'+value.propierty_location+'</strong></label>');
+          $('#lista').append('<br><label>Numero Exterior: <strong>'+value.ext_number+'</strong></label>');
+          $('#lista').append('<br><label>Numero Interior: <strong>'+value.int_number+'</strong></label>');
+          $('#lista').append('<br><label>Superficie: <strong>'+value.surface+' mt2</strong></label>');
+          $('#lista').append('<br><label>Valor  Contable: <strong>$'+value.book_value+'</strong></label>');
+          $('#lista').append('<br><label>Cuenta Contable: <strong>'+value.accounting_item+'</strong></label>');
+          $('#lista').append('<br><label>Acta Notarial: <strong>'+value.notary_minutes+'</strong></label>');
+          $('#lista').append('<br><label>RPP: <strong>'+value.rpp+'</strong></label>');
+          $('#lista').append('<br><label>Situación Actual: <strong>'+value.current_situation+'</strong></label>');
+          $('#lista').append('<br><label>Notario: <strong>'+value.notary+'</strong></label>');
+          $('#listb').append('<label>Fecha de Escritura: <strong>'+value.document_date+'</strong></label>');
+          $('#listb').append('<br><label>Numero de Documento: <strong>'+value.document_number+'</strong></label>');
+          $('#listb').append('<br><label>Cuenta Predial: <strong>'+value.propierty_account+'</strong></label>');
+          $('#listb').append('<br><label>Coordenadas: <strong>'+value.utm_coordinates+'</strong></label>');
+          $('#listb').append('<br><label>Sesión de Ayuntamiento: <strong>'+value.government_session+'</strong></label>');
+          $('#listb').append('<br><label>Propietario: <strong>'+value.owner.owner_name+'</strong></label>');
+          $('#listb').append('<br><label>Descripción del Predio: <strong>'+value.propierty_description.propierty_description+'</strong></label>');
+          $('#listb').append('<br><label>Tipo de Uso: <strong>'+value.use_type.use_type+'</strong></label>');
+          $('#listb').append('<br><label>Forma de Adquisición: <strong>'+value.adquisition_shape.adquisition_shape+'</strong></label>');
+          $('#listb').append('<br><label>Documento Soporte: <strong>'+value.support_document.support_document+'</strong></label>');
+          $('#listc').append('<label>Observaciones: <strong>'+value.observations+'</strong></label>');
+        });
+      }
+    });
+    $('#dd').dialog('open').dialog('center').dialog('setTitle','Información del Predio');
+
+  }
+
+  }
 
 $('#newPropierty').on('click', newPropierty);
 $('#savePropierty').on('click', savePropierty);
 $('#editPropierty').on('click', editPropierty);
+$('#viewPropierty').on('click', viewPropierty);
 });

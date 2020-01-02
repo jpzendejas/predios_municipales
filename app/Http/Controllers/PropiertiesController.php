@@ -143,4 +143,9 @@ class PropiertiesController extends Controller
     }
   }
 
+  public function get_propierty(Request $request, $id){
+    $propierty = Propierty::with('propierty_description','use_type','adquisition_shape','support_document','owner')->where('id',$id)->get();
+    return $propierty;
+  }
+
 }

@@ -227,6 +227,34 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
       </center>
     </div>
+    <div id="dd">
+      <div class="row">
+        <div class="col-sm-6">
+          <ul id="lista">
+          </ul>
+        </div>
+        <div class="col-sm-6">
+          <ul id="listb">
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <ul id="listc">
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <ul>
+            Imagenes:
+          </ul>
+        </div>
+        <div class="col-sm-6">
+          <ul>
+            Documentación:
+          </ul>
+        </div>
+        </div>
+    </div>
 
 </div>
 @endsection
