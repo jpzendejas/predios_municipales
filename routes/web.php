@@ -23,3 +23,5 @@ Route::post('/obtener_propiedades','PropiertiesController@get_propierties');
 Route::post('/propietarios','PropiertiesController@get_owners');
 Route::post('/actualizar_propiedad/{id}','PropiertiesController@update_propierties');
 Route::get('/obterner_predio/{id}','PropiertiesController@get_propierty');
+Route::get('/obtener_imagenes/{id}','PropiertiesController@get_images');
+Route::get('/obtener_documentos/{id}','PropiertiesController@get_documents');

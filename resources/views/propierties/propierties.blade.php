@@ -244,13 +244,11 @@
       </div>
       <div class="row">
         <div class="col-sm-6">
-          <ul>
-            Imagenes:
+          <ul id="listd">
           </ul>
         </div>
         <div class="col-sm-6">
-          <ul>
-            Documentación:
+          <ul id="liste">
           </ul>
         </div>
         </div>

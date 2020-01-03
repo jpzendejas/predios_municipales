@@ -28,4 +28,12 @@ class Propierty extends Model
       return $this->belongsTo('App\Owner');
     }
 
+    public function image(){
+      return $this->hasMany('App\PropiertyImage');
+    }
+    public function document(){
+      return $this->hasMany('App\PropiertyDocument');
+    }
+
+
 }

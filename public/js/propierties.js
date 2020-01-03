@@ -192,19 +192,28 @@ $(document).ready(function(){
 
   var row = $('#dg').datagrid('getSelected');
   if (row) {
+    get_images(row.id);
+    get_documents(row.id);
+    get_propierty(row.id);
+
     $('#dd').dialog({
     title: 'My Dialog',
     width: 700,
     height: 350,
     closed: false,
     cache: false,
-    modal: true
+    modal: true,
+    resizable: true
     });
+    $('#dd').dialog('open').dialog('center').dialog('setTitle','Información del Predio');
+  }
+
+  }
+  function get_propierty(id){
     $.ajax({
       method:'GET',
       dataType:'json',
-      url:"/obterner_predio/"+row.id,
-      data:{'id':row.id},
+      url:"/obterner_predio/"+id,
       success: function(response){
         $.each(response, function(index, value){
           $('#lista').append('<label>Numero de Inventario: <strong>'+value.inventory_number+'</strong></label>');
@@ -232,10 +241,35 @@ $(document).ready(function(){
         });
       }
     });
-    $('#dd').dialog('open').dialog('center').dialog('setTitle','Información del Predio');
-
   }
-
+  function get_images(id){
+    var ind;
+    $('#listd').append('<label>Imagenes: </label>');
+    $.ajax({
+      method:'GET',
+      dataType:"json",
+      url:"/obtener_imagenes/"+id,
+      success: function(response){
+        console.log(response);
+        $.each(response, function(index, value){
+          ind = index+1;
+          $('#listd').append('<br><a href="http://127.0.0.1:8000/images/'+value.image+'" target="_blank">Imagen '+ind+'</a>');
+        });
+      }
+    });
+  }
+  function get_documents(id){
+    $('#liste').append('<label>Documentos: </label>');
+    $.ajax({
+      method:'GET',
+      dataType:"json",
+      url:"/obtener_documentos/"+id,
+      success:function(response){
+        $.each(response, function(index, value){
+          $('#liste').append('<br><a href="http://127.0.0.1:8000/documents/'+value.document_name+'" target="_blank">Documento</a>');
+        });
+      }
+    });
   }
 
 $('#newPropierty').on('click', newPropierty);

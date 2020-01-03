@@ -147,5 +147,14 @@ class PropiertiesController extends Controller
     $propierty = Propierty::with('propierty_description','use_type','adquisition_shape','support_document','owner')->where('id',$id)->get();
     return $propierty;
   }
+  public function get_images(Request $request, $id){
+    $images = PropiertyImage::where('propierty_id', $id)->get();
+    return $images;
+  }
+
+  public function get_documents(Request $request, $id){
+    $documents = PropiertyDocument::where('propierty_id', $id)->get();
+    return $documents;
+  }
 
 }
