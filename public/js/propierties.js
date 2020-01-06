@@ -189,8 +189,13 @@ $(document).ready(function(){
     }
   }
   var viewPropierty = function(){
+    $('#lista').empty();
+    $('#listb').empty();
+    $('#listc').empty();
+    $('#listd').empty();
+    $('#liste').empty();
 
-  var row = $('#dg').datagrid('getSelected');
+    var row = $('#dg').datagrid('getSelected');
   if (row) {
     get_images(row.id);
     get_documents(row.id);
@@ -244,7 +249,7 @@ $(document).ready(function(){
   }
   function get_images(id){
     var ind;
-    $('#listd').append('<label>Imagenes: </label>');
+    $('#listd').append('<label><strong>Imagenes: </strong></label>');
     $.ajax({
       method:'GET',
       dataType:"json",
@@ -259,7 +264,7 @@ $(document).ready(function(){
     });
   }
   function get_documents(id){
-    $('#liste').append('<label>Documentos: </label>');
+    $('#liste').append('<label><strong>Documentos: </strong> </label>');
     $.ajax({
       method:'GET',
       dataType:"json",
