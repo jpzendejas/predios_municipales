@@ -3,7 +3,7 @@
 
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
+    <a class="nav-link" href="{{url('consulta_predios/')}}">
       <i class="ni ni-tv-2 text-red"></i> Consulta de Predios
     </a>
   </li>

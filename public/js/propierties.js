@@ -200,6 +200,7 @@ $(document).ready(function(){
     get_images(row.id);
     get_documents(row.id);
     get_propierty(row.id);
+    get_maps_location(row.propierty_location,row.ext_number,row.int_number);
 
     $('#dd').dialog({
     title: 'My Dialog',
@@ -243,6 +244,8 @@ $(document).ready(function(){
           $('#listb').append('<br><label>Forma de Adquisición: <strong>'+value.adquisition_shape.adquisition_shape+'</strong></label>');
           $('#listb').append('<br><label>Documento Soporte: <strong>'+value.support_document.support_document+'</strong></label>');
           $('#listc').append('<label>Observaciones: <strong>'+value.observations+'</strong></label>');
+          $('#listf').append('<label><strong>Vista en Maps: </strong></label>');
+          $('#listf').append('<br><a href="https://www.google.com/maps/place/'+value.propierty_location+'" target="_blank">Mapa</a>');
         });
       }
     });
@@ -276,6 +279,11 @@ $(document).ready(function(){
       }
     });
   }
+  function get_maps_location(location,ext_number,int_number){
+    console.log(location);
+    console.log(ext_number);
+    console.log(int_number);
+}
 
 $('#newPropierty').on('click', newPropierty);
 $('#savePropierty').on('click', savePropierty);

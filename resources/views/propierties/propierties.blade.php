@@ -243,12 +243,16 @@
         </ul>
       </div>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           <ul id="listd">
           </ul>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           <ul id="liste">
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <ul id="listf">
           </ul>
         </div>
         </div>

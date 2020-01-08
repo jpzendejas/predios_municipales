@@ -129,7 +129,9 @@ class PropiertiesController extends Controller
           $im->propierty_id = $id;
           $im->image=$name;
           $im->save();
-      }if ($request->pdf) {
+        }
+      }
+      if ($request->pdf) {
           $destinationPath= public_path('documents');
           $pdf =$request->file('pdf');
           $name = $pdf->getClientOriginalName();
@@ -140,7 +142,6 @@ class PropiertiesController extends Controller
           $document->save();
       }
       echo json_encode(array('success'=>true));
-    }
   }
 
   public function get_propierty(Request $request, $id){
@@ -155,6 +156,18 @@ class PropiertiesController extends Controller
   public function get_documents(Request $request, $id){
     $documents = PropiertyDocument::where('propierty_id', $id)->get();
     return $documents;
+  }
+
+  public function check_propierties(Request $request){
+
+      $propierties = Propierty::with('propierty_description','use_type','adquisition_shape','support_document','owner')->get();
+      return view('propierties.newprop', compact('propierties'));
+  }
+
+  public function view_propierty(Request $request, $id){
+    $propierties = Propierty::where('id', $id)->get();
+    return view('propierties.propierty', compact('propierties'));
+     // dd($propierty);
   }
 
 }
