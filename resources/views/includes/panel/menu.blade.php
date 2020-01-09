@@ -3,15 +3,15 @@
 
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="{{url('consulta_predios/')}}">
-      <i class="ni ni-tv-2 text-red"></i> Consulta de Predios
-    </a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link" href="{{url('nuevo_predio')}}">
-      <i class="ni ni-planet text-blue"></i>  Nuevo Predio
+      <i class="ni ni-tv-2 text-red"></i>Predios
     </a>
   </li>
+  <!-- <li class="nav-item">
+    <a class="nav-link" href="{{url('nuevo_predio')}}">
+      <i class="ni ni-planet text-blue"></i>Nuevo Predio
+    </a>
+  </li> -->
   <!-- <li class="nav-item">
     <a class="nav-link" href="./examples/maps.html">
       <i class="ni ni-single-02 text-orange"></i> Médicos
@@ -22,6 +22,33 @@
       <i class="ni ni-satisfied text-info"></i> Pacientes
     </a>
   </li> -->
+  <!-- <li class="nav-item">
+    <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('formLogout').submit();">
+      <i class="ni ni-key-25 text-info"></i>Cerrar sesíon
+    </a>
+    <form  action="{{route('logout')}}" method="post" style="display: none;" id="formLogout">
+      @csrf
+    </form>
+  </li> -->
+</ul>
+<hr class="my-3">
+<h6 class="navbar-heading text-muted">Catalogos</h6>
+<ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link" href="./examples/profile.html">
+      <i class="ni ni-satisfied text-info"></i> Formas de Adquisición
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./examples/profile.html">
+      <i class="ni ni-satisfied text-orange"></i> Propietarios
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./examples/profile.html">
+      <i class="ni ni-satisfied text-orange"></i>Descripción Propiedades
+    </a>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('formLogout').submit();">
       <i class="ni ni-key-25 text-info"></i>Cerrar sesíon
