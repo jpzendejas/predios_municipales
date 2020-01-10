@@ -35,18 +35,28 @@
 <h6 class="navbar-heading text-muted">Catalogos</h6>
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link" href="./examples/profile.html">
-      <i class="ni ni-satisfied text-info"></i> Formas de Adquisición
+    <a class="nav-link" href="{{url('formas_adquisicion')}}">
+      <i class="ni ni-atom text-info"></i> Formas de Adquisición
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('propietarios')}}">
+      <i class="ni ni-circle-08 text-orange"></i> Propietarios
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('descripcion_predios')}}">
+      <i class="ni ni-bullet-list-67 text-green"></i>Descripción Propiedades
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="./examples/profile.html">
-      <i class="ni ni-satisfied text-orange"></i> Propietarios
+      <i class="ni ni-paper-diploma text-primary"></i>Documentos Soporte
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="./examples/profile.html">
-      <i class="ni ni-satisfied text-orange"></i>Descripción Propiedades
+      <i class="ni ni-ungroup text-orange"></i>Tipos de Uso
     </a>
   </li>
   <li class="nav-item">

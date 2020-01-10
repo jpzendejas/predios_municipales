@@ -31,7 +31,8 @@
     </div>
     <div class="col-sm-6">
         <center><h3>UBICACIÓN</h3></center><br>
-        <center>Google Maps</center>
+        <center><div id="map"></div>
+</center>
     </div>
   </div>
   <div class="row">

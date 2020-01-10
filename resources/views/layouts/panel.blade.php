@@ -172,6 +172,12 @@
   <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
   <!-- more js's -->
   <script src="{{asset('js/propierties.js')}}"></script>
+  <script src="{{asset('js/adquisition_shapes.js')}}"></script>
+  <script src="{{asset('js/owners.js')}}"></script>
+  <script src="{{asset('js/propierty_descriptions.js')}}"></script>
+
+
+
 
 </body>
 
