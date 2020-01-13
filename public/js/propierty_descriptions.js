@@ -61,6 +61,6 @@ $(document).ready(function(){
 $('#newPropiertyDescription').on('click', newPropiertyDescription);
 $('#savePropiertyDescription').on('click', savePropiertyDescription);
 $('#editPropiertyDescription').on('click', editPropiertyDescription);
-$('#destroyPropiertyDescription').on('click', destroyPropiertyDescription);
+// $('#destroyPropiertyDescription').on('click', destroyPropiertyDescription);
 
 });

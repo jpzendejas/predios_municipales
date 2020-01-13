@@ -50,12 +50,12 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./examples/profile.html">
+    <a class="nav-link" href="{{url('documentos_soporte')}}">
       <i class="ni ni-paper-diploma text-primary"></i>Documentos Soporte
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./examples/profile.html">
+    <a class="nav-link" href="{{url('uso_tipos')}}">
       <i class="ni ni-ungroup text-orange"></i>Tipos de Uso
     </a>
   </li>

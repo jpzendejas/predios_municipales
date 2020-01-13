@@ -175,6 +175,10 @@
   <script src="{{asset('js/adquisition_shapes.js')}}"></script>
   <script src="{{asset('js/owners.js')}}"></script>
   <script src="{{asset('js/propierty_descriptions.js')}}"></script>
+  <script src="{{asset('js/support_documents.js')}}"></script>
+  <script src="{{asset('js/use_types.js')}}"></script>
+
+
 
 
 
