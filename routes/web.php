@@ -47,3 +47,6 @@ Route::get('/uso_tipos','UseTypesController@index');
 Route::post('obtener_tipos_uso','UseTypesController@get_use_types');
 Route::post('/save_use_type','UseTypesController@save_use_types');
 Route::post('/update_use_type/{id}','UseTypesController@update_use_types');
+Route::get('/user_password_updates','UpdatePasswordsController@user_password_update');
+Route::get('/update_password','UpdatePasswordsController@update_passwords');
+Route::post('/update_pass','UpdatePasswordsController@update_password');
