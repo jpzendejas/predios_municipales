@@ -1,6 +1,10 @@
 $(document).ready(function(){
   var url;
-
+  $('#search').textbox({
+    onKeypress: function(value){
+      console.log('The value has been changed to ' + value);
+    }
+  });
   var newPropierty=function(){
     var department = $('#department').val();
     if(department == 'oterritorial') {
@@ -19,7 +23,8 @@ $(document).ready(function(){
       $('#propierty_account').textbox({disabled:'true'});
       $('#current_situation').textbox({disabled:'true'});
       $('#catastral_key').textbox({disabled:'true'});//catastro
-      $('#owner_name').textbox({disabled:'true'});//catastro
+      $('#owner_id').textbox({disabled:'true'});//catastro
+      $('#utm_coordinates').textbox({disabled:'true'});
     }else if (department == 'catastro'){
       $('#document_date').datebox({disabled:'true'});//ordenamiento
       $('#support_document_id').combobox({disabled:'true'});
@@ -33,7 +38,31 @@ $(document).ready(function(){
       $('#propierty_account').textbox({disabled:'true'});
       $('#current_situation').textbox({disabled:'true'});
       $('#government_session').textbox({disabled:'true'});//ordenamiento
-      }else if (department == 'cpatrimonial') {
+    }else if (department == 'predial') {
+      $('#utm_coordinates').textbox({disabled:'true'});//catastro
+      $('#notary_minutes').textbox({disabled:'true'});//ordenamiento
+      $('#rpp').textbox({disabled:'true'});//ordenamiento
+      $('#notary').textbox({disabled:'true'});//ordenamiento
+      $('#government_session').textbox({disabled:'true'});//ordenamiento
+      $('#owner_id').textbox({disabled:'true'});//
+      $('#document_date').textbox({disabled:'true'});//ordenamiento
+      $('#use_type_id').combobox({disabled:'true'});//catastro
+      $('#propierty_description_id').combobox({disabled:'true'});//catastro
+      $('#adquisition_shape_id').combobox({disabled:'true'});//catastro
+      $('#support_document_id').combobox({disabled:'true'});
+      $('#inventory_number').textbox({disabled:'true'});//controlpatrimonial
+      $('#propierty_location').textbox({disabled:'true'});//catastro
+      $('#ext_number').textbox({disabled:'true'});//catastro
+      $('#int_number').textbox({disabled:'true'});//catastro
+      $('#surface').textbox({disabled:'true'});//catastro
+      $('#book_value').textbox({disabled:'true'});
+      $('#accounting_item').textbox({disabled:'true'});
+      $('#document_number').textbox({disabled:'true'});
+      $('#propierty_account').textbox({disabled:'true'});
+      $('#current_situation').textbox({disabled:'true'});
+      $('#owner_name').textbox({disabled:'true'});//catastro
+    }
+      else if (department == 'cpatrimonial') {
       $('#use_type_id').combobox({disabled:'true'});//catastro
       $('#propierty_description_id').combobox({disabled:'true'});//catastro
       $('#adquisition_shape_id').combobox({disabled:'true'});//catastro
@@ -54,6 +83,28 @@ $(document).ready(function(){
       $('#catastral_key').textbox({disabled:'true'});//catastro
       $('#government_session').textbox({disabled:'true'});//ordenamiento
       $('#owner_name').textbox({disabled:'true'});//catastro
+    }
+    else if (department == 'egresos') {
+      $('#utm_coordinates').textbox({disabled:'true'});//catastro
+      $('#inventory_number').textbox({disabled:'true'});//catastro
+      $('#use_type_id').combobox({disabled:'true'});//catastro
+      $('#propierty_description_id').combobox({disabled:'true'});//catastro
+      $('#adquisition_shape_id').combobox({disabled:'true'});//catastro
+      $('#document_date').datebox({disabled:'true'});//ordenamiento
+      $('#support_document_id').combobox({disabled:'true'});
+      $('#propierty_location').textbox({disabled:'true'});//catastro
+      $('#ext_number').textbox({disabled:'true'});//catastro
+      $('#int_number').textbox({disabled:'true'});//catastro
+      $('#surface').textbox({disabled:'true'});//catastro
+      $('#notary_minutes').textbox({disabled:'true'});//ordenamiento
+      $('#rpp').textbox({disabled:'true'});//ordenamiento
+      $('#notary').textbox({disabled:'true'});//ordenamiento
+      $('#document_number').textbox({disabled:'true'});
+      $('#propierty_account').textbox({disabled:'true'});
+      $('#current_situation').textbox({disabled:'true'});
+      $('#catastral_key').textbox({disabled:'true'});//catastro
+      $('#government_session').textbox({disabled:'true'});//ordenamiento
+      $('#owner_id').combobox({disabled:'true'});//catastro
     }
     $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nueva Propiedad');
     $('#fm').form('clear');
@@ -132,6 +183,106 @@ $(document).ready(function(){
   var editPropierty = function(){
     var row = $('#dg').datagrid('getSelected');
     if (row) {
+      var department = $('#department').val();
+      if(department == 'oterritorial') {
+        $('#use_type_id').combobox({disabled:'true'});//catastro
+        $('#propierty_description_id').combobox({disabled:'true'});//catastro
+        $('#adquisition_shape_id').combobox({disabled:'true'});//catastro
+        $('#support_document_id').combobox({disabled:'true'});
+        $('#inventory_number').textbox({disabled:'true'});//controlpatrimonial
+        $('#propierty_location').textbox({disabled:'true'});//catastro
+        $('#ext_number').textbox({disabled:'true'});//catastro
+        $('#int_number').textbox({disabled:'true'});//catastro
+        $('#surface').textbox({disabled:'true'});//catastro
+        $('#book_value').textbox({disabled:'true'});
+        $('#accounting_item').textbox({disabled:'true'});
+        $('#document_number').textbox({disabled:'true'});
+        $('#propierty_account').textbox({disabled:'true'});
+        $('#current_situation').textbox({disabled:'true'});
+        $('#catastral_key').textbox({disabled:'true'});//catastro
+        $('#owner_id').textbox({disabled:'true'});//catastro
+        $('#utm_coordinates').textbox({disabled:'true'});
+      }else if (department == 'catastro'){
+        $('#document_date').datebox({disabled:'true'});//ordenamiento
+        $('#support_document_id').combobox({disabled:'true'});
+        $('#inventory_number').textbox({disabled:'true'});//controlpatrimonial
+        $('#book_value').textbox({disabled:'true'});
+        $('#accounting_item').textbox({disabled:'true'});
+        $('#notary_minutes').textbox({disabled:'true'});//ordenamiento
+        $('#rpp').textbox({disabled:'true'});//ordenamiento
+        $('#notary').textbox({disabled:'true'});//ordenamiento
+        $('#document_number').textbox({disabled:'true'});
+        $('#propierty_account').textbox({disabled:'true'});
+        $('#current_situation').textbox({disabled:'true'});
+        $('#government_session').textbox({disabled:'true'});//ordenamiento
+      }else if (department == 'predial') {
+        $('#utm_coordinates').textbox({disabled:'true'});//catastro
+        $('#notary_minutes').textbox({disabled:'true'});//ordenamiento
+        $('#rpp').textbox({disabled:'true'});//ordenamiento
+        $('#notary').textbox({disabled:'true'});//ordenamiento
+        $('#government_session').textbox({disabled:'true'});//ordenamiento
+        $('#owner_id').textbox({disabled:'true'});//
+        $('#document_date').textbox({disabled:'true'});//ordenamiento
+        $('#use_type_id').combobox({disabled:'true'});//catastro
+        $('#propierty_description_id').combobox({disabled:'true'});//catastro
+        $('#adquisition_shape_id').combobox({disabled:'true'});//catastro
+        $('#support_document_id').combobox({disabled:'true'});
+        $('#inventory_number').textbox({disabled:'true'});//controlpatrimonial
+        $('#propierty_location').textbox({disabled:'true'});//catastro
+        $('#ext_number').textbox({disabled:'true'});//catastro
+        $('#int_number').textbox({disabled:'true'});//catastro
+        $('#surface').textbox({disabled:'true'});//catastro
+        $('#book_value').textbox({disabled:'true'});
+        $('#accounting_item').textbox({disabled:'true'});
+        $('#document_number').textbox({disabled:'true'});
+        $('#propierty_account').textbox({disabled:'true'});
+        $('#current_situation').textbox({disabled:'true'});
+        $('#owner_name').textbox({disabled:'true'});//catastro
+      }
+        else if (department == 'cpatrimonial') {
+        $('#use_type_id').combobox({disabled:'true'});//catastro
+        $('#propierty_description_id').combobox({disabled:'true'});//catastro
+        $('#adquisition_shape_id').combobox({disabled:'true'});//catastro
+        $('#document_date').datebox({disabled:'true'});//ordenamiento
+        $('#support_document_id').combobox({disabled:'true'});
+        $('#propierty_location').textbox({disabled:'true'});//catastro
+        $('#ext_number').textbox({disabled:'true'});//catastro
+        $('#int_number').textbox({disabled:'true'});//catastro
+        $('#surface').textbox({disabled:'true'});//catastro
+        $('#book_value').textbox({disabled:'true'});
+        $('#accounting_item').textbox({disabled:'true'});
+        $('#notary_minutes').textbox({disabled:'true'});//ordenamiento
+        $('#rpp').textbox({disabled:'true'});//ordenamiento
+        $('#notary').textbox({disabled:'true'});//ordenamiento
+        $('#document_number').textbox({disabled:'true'});
+        $('#propierty_account').textbox({disabled:'true'});
+        $('#current_situation').textbox({disabled:'true'});
+        $('#catastral_key').textbox({disabled:'true'});//catastro
+        $('#government_session').textbox({disabled:'true'});//ordenamiento
+        $('#owner_name').textbox({disabled:'true'});//catastro
+      }
+      else if (department == 'egresos') {
+        $('#utm_coordinates').textbox({disabled:'true'});//catastro
+        $('#inventory_number').textbox({disabled:'true'});//catastro
+        $('#use_type_id').combobox({disabled:'true'});//catastro
+        $('#propierty_description_id').combobox({disabled:'true'});//catastro
+        $('#adquisition_shape_id').combobox({disabled:'true'});//catastro
+        $('#document_date').datebox({disabled:'true'});//ordenamiento
+        $('#support_document_id').combobox({disabled:'true'});
+        $('#propierty_location').textbox({disabled:'true'});//catastro
+        $('#ext_number').textbox({disabled:'true'});//catastro
+        $('#int_number').textbox({disabled:'true'});//catastro
+        $('#surface').textbox({disabled:'true'});//catastro
+        $('#notary_minutes').textbox({disabled:'true'});//ordenamiento
+        $('#rpp').textbox({disabled:'true'});//ordenamiento
+        $('#notary').textbox({disabled:'true'});//ordenamiento
+        $('#document_number').textbox({disabled:'true'});
+        $('#propierty_account').textbox({disabled:'true'});
+        $('#current_situation').textbox({disabled:'true'});
+        $('#catastral_key').textbox({disabled:'true'});//catastro
+        $('#government_session').textbox({disabled:'true'});//ordenamiento
+        $('#owner_id').combobox({disabled:'true'});//catastro
+      }
       $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Empresa');
       $('#fm').form('load',row);
       $('#propierty_description_id').combobox({
@@ -284,9 +435,18 @@ $(document).ready(function(){
     console.log(ext_number);
     console.log(int_number);
 }
+var searchPropierty = function(){
+  var search = $('#search').val();
+  $('#dg').datagrid('load',{
+    search:$('#search').val()
+  })
+}
 
 $('#newPropierty').on('click', newPropierty);
 $('#savePropierty').on('click', savePropierty);
 $('#editPropierty').on('click', editPropierty);
 $('#viewPropierty').on('click', viewPropierty);
+$('#searchPropierty').on('click', searchPropierty);
+
+
 });

@@ -11,6 +11,7 @@ use App\Propierty;
 use App\Owner;
 use App\PropiertyImage;
 use App\PropiertyDocument;
+use DB;
 
 
 class PropiertiesController extends Controller
@@ -21,6 +22,7 @@ class PropiertiesController extends Controller
     public function get_propierties(Request $request){
     $page= isset($_POST['page']) ? intval($_POST['page']):1;
      $rows= isset($_POST['rows']) ? intval($_POST['rows']):10;
+     $search = $request->search;
      $offset = ($page-1)*$rows;
      $sql="select count(*) from propierties";
 
@@ -34,7 +36,26 @@ class PropiertiesController extends Controller
      $row=mysqli_fetch_row($rs);
      $result["total"]= $row[0];
 
-     $propierties=Propierty::orderBy('id','asc')->skip($offset)->take($rows)->get();
+     if($search){
+       $propierties = DB::table('propierties')
+                      ->join('propierty_descriptions','propierty_descriptions.id','=','propierties.propierty_description_id')
+                      ->join('use_types','propierties.use_type_id','=','use_types.id')
+                      ->join('adquisition_shapes','adquisition_shapes.id','propierties.adquisition_shape_id')
+                      ->join('support_documents','support_documents.id','=','propierties.support_document_id')
+                      ->join('owners','owners.id','=','propierties.owner_id')
+                      ->select('propierties.*','use_types.use_type','adquisition_shapes.adquisition_shape','propierty_descriptions.propierty_description','support_documents.support_document','owners.owner_name')
+                      ->where('propierties.inventory_number','LIKE','%'.$search.'%')
+                      ->orWhere('propierties.propierty_location','LIKE','%'.$search.'%')->skip($offset)->take($rows)->get();
+      }else {
+        $propierties = DB::table('propierties')
+                       ->join('propierty_descriptions','propierty_descriptions.id','=','propierties.propierty_description_id')
+                       ->join('use_types','propierties.use_type_id','=','use_types.id')
+                       ->join('adquisition_shapes','adquisition_shapes.id','propierties.adquisition_shape_id')
+                       ->join('support_documents','support_documents.id','=','propierties.support_document_id')
+                       ->join('owners','owners.id','=','propierties.owner_id')
+                       ->select('propierties.*','use_types.use_type','adquisition_shapes.adquisition_shape','propierty_descriptions.propierty_description','support_documents.support_document','owners.owner_name')
+                       ->skip($offset)->take($rows)->get();
+     }
      $items=array();
      foreach($propierties as $propierty){
        array_push($items, $propierty);
@@ -83,7 +104,7 @@ class PropiertiesController extends Controller
       $propierty->document_number = $request->document_number;
       $propierty->propierty_account = $request->propierty_account;
       $propierty->catastral_key = $request->catastral_key;
-      //$propierty->utm_coordinates = $request->utm_coordinates;
+      $propierty->utm_coordinates = $request->utm_coordinates;
       $propierty->government_session = $request->government_session;
       $propierty->owner_id = $request->owner_id;
       $propierty->observations = $request->observations;
