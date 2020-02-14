@@ -12,7 +12,9 @@
             </div>
         </div>
     </div>
-    <table id="dg" title="Propiedades" class="easyui-datagrid" style="width:100%;height:40%"
+    <table id="dgp" title="Propiedades" toolbar="#toolbar" pagination="true"   rownumbers="true" singleSelect="true"></table>
+
+    <!-- <table id="dgp" title="Propiedades" class="easyui-datagrid" style="width:100%;height:40%"
             url="{{url('obtener_propiedades')}}"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
@@ -35,11 +37,10 @@
                 <th field="catastral_key" width="50">Clave Catastral</th>
                 <th field="government_session" width="50">Sesión de Ayuntamiento</th>
                 <th field="owner_name" width="50">Nombre del Propietario</th>
-                <!-- <th field="register_number" width="50">No. de Registro</th> -->
                 <th field="observations" width="50">Observaciones</th>
             </tr>
         </thead>
-    </table>
+    </table> -->
     <div id="toolbar">
         <a href="javascript:void(0)" id="newPropierty" class="easyui-linkbutton" iconCls="icon-add" plain="true" >Nueva Propiedad</a>
         <a href="javascript:void(0)" id="editPropierty" class="easyui-linkbutton" iconCls="icon-edit" plain="true" >Editar Propiedad</a>
@@ -50,7 +51,7 @@
 
 
     </div>
-    <div id="dlg" class="easyui-dialog" style="width:600px; height:75%;" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
+    <div id="dlg" class="easyui-dialog" style="width:600px; height:100%;" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
         <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px" enctype="multipart/form-data">
           <input type="hidden" name="department" id="department" value="{{auth()->user()->department}}">
           <div class="row">
@@ -240,6 +241,8 @@
       </center>
     </div>
     <div id="dd">
+      <h3>Datos del Predio:</h3>
+      <hr>
       <div class="row">
         <div class="col-sm-6">
           <ul id="lista">
@@ -250,10 +253,14 @@
           </ul>
         </div>
       </div>
+    <h3>Observaciones:</h3>
+      <hr>
       <div class="row">
         <ul id="listc">
         </ul>
       </div>
+      <h3>Archivos:</h3>
+      <hr>
       <div class="row">
         <div class="col-sm-4">
           <ul id="listd">

@@ -16,6 +16,8 @@
   <link href="{{asset('vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="{{asset('css/argon.css?v=1.0.0')}}" rel="stylesheet">
+  <link type="text/css" href="{{asset('js/toastr.min.css')}}" rel="stylesheet">
+
 </head>
 
 <body class="bg-default">
@@ -116,6 +118,47 @@
   <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <!-- Argon JS -->
   <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
+  <script src="{{asset('js/toastr.min.js')}}"></script>
 </body>
+<script>
+toastr.options = {
+"closeButton": false,
+"debug": false,
+"newestOnTop": false,
+"progressBar": false,
+"positionClass": "toast-bottom-right",
+"preventDuplicates": false,
+"onclick": null,
+"showDuration": "300",
+"hideDuration": "1000",
+"timeOut": "5000",
+"extendedTimeOut": "1000",
+"showEasing": "swing",
+"hideEasing": "linear",
+"showMethod": "fadeIn",
+"hideMethod": "fadeOut"
+}
+@if(Session::has('message'))
+var type = "{{ Session::get('alert-type', 'info') }}";
+switch(type){
+  case 'info':
+  toastr.info("{{ Session::get('message') }}");
+  break;
+
+  case 'warning':
+  toastr.warning("{{ Session::get('message') }}");
+  break;
+
+  case 'success':
+  toastr.success("{{ Session::get('message') }}");
+  break;
+
+  case 'error':
+  toastr.error("{{ Session::get('message') }}");
+  break;
+}
+@endif
+
+</script>
 
 </html>

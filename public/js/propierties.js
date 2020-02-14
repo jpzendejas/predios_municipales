@@ -1,4 +1,39 @@
 $(document).ready(function(){
+  $('#dd').dialog({
+  title: 'My Dialog',
+  width: 700,
+  height: 350,
+  closed: true,
+  cache: false,
+  modal: true,
+  resizable: true
+  });
+  $('#dgp').datagrid({
+    url:'/obtener_propiedades',
+    columns:[[
+        {field:'inventory_number',title:'Code',width:100},
+        {field:'propierty_location',title:'Ubicación',width:100},
+        {field:'ext_number',title:'Num ext',width:100},
+        {field:'int_number',title:'Num Int',width:100},
+        {field:'surface',title:'Superficie',width:100},
+        {field:'book_value',title:'Valor Contable',width:100},
+        {field:'accounting_item',title:'Partida Contable',width:100},
+        {field:'notary_minutes',title:'Acta Notarial',width:100},
+        {field:'rpp',title:'RPP',width:100},
+        {field:'current_situation',title:'Situación Actual',width:100},
+        {field:'notary',title:'Notario',width:100},
+        {field:'document_date',title:'Fecha de Escritura',width:100},
+        {field:'document_number',title:'No. de Documento',width:100},
+        {field:'propierty_account',title:'Cuenta Predial',width:100},
+        {field:'catastral_key',title:'Clave Catastral',width:100},
+        {field:'government_session',title:'Sesión de Ayuntamiento',width:100},
+        {field:'owner.owner',title:'Propietario',width:100,formatter:function(value,row){return row.owner?.owner_name}},
+        {field:'adquisition_shape.adquisition_shape',title:'Forma de Adquisición',width:100,formatter:function(value,row){return row.adquisition_shape?.adquisition_shape}},
+        {field:'propierty_description.propierty_description',title:'Descripción de Propiedad',width:100,formatter:function(value,row){return row.propierty_description?.propierty_description}},
+        {field:'support_document.support_document',title:'Documento Soporte',width:100,formatter:function(value,row){return row.support_document?.support_document}},
+        {field:'use_type.use_type',title:'Tipo de Uso',width:100,align:'right',formatter:function(value,row){return row.use_type.use_type}}
+    ]]
+  });
   var url;
   $('#search').textbox({
     onKeypress: function(value){
@@ -181,7 +216,7 @@ $(document).ready(function(){
       });
   }
   var editPropierty = function(){
-    var row = $('#dg').datagrid('getSelected');
+    var row = $('#dgp').datagrid('getSelected');
     if (row) {
       var department = $('#department').val();
       if(department == 'oterritorial') {
@@ -346,23 +381,13 @@ $(document).ready(function(){
     $('#listd').empty();
     $('#liste').empty();
 
-    var row = $('#dg').datagrid('getSelected');
+  var row = $('#dgp').datagrid('getSelected');
   if (row) {
     get_images(row.id);
     get_documents(row.id);
     get_propierty(row.id);
     get_maps_location(row.propierty_location,row.ext_number,row.int_number);
-
-    $('#dd').dialog({
-    title: 'My Dialog',
-    width: 700,
-    height: 350,
-    closed: false,
-    cache: false,
-    modal: true,
-    resizable: true
-    });
-    $('#dd').dialog('open').dialog('center').dialog('setTitle','Información del Predio');
+    $('#dd').dialog('open').dialog('center').dialog('setTitle','Información');
   }
 
   }
@@ -394,7 +419,7 @@ $(document).ready(function(){
           $('#listb').append('<br><label>Tipo de Uso: <strong>'+value.use_type.use_type+'</strong></label>');
           $('#listb').append('<br><label>Forma de Adquisición: <strong>'+value.adquisition_shape.adquisition_shape+'</strong></label>');
           $('#listb').append('<br><label>Documento Soporte: <strong>'+value.support_document.support_document+'</strong></label>');
-          $('#listc').append('<label>Observaciones: <strong>'+value.observations+'</strong></label>');
+          $('#listc').append('<label><strong>'+value.observations+'</strong></label>');
           $('#listf').append('<label><strong>Vista en Maps: </strong></label>');
           $('#listf').append('<br><a href="https://www.google.com/maps/place/'+value.propierty_location+'" target="_blank">Mapa</a>');
         });
@@ -437,7 +462,7 @@ $(document).ready(function(){
 }
 var searchPropierty = function(){
   var search = $('#search').val();
-  $('#dg').datagrid('load',{
+  $('#dgp').datagrid('load',{
     search:$('#search').val()
   })
 }

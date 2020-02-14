@@ -7,11 +7,15 @@ use App\AdquisitionShape;
 use App\PropiertyDescription;
 use App\UseType;
 use App\SupportDocument;
+use App\User;
+use App\Mail\NuevaInformacionPredio;
+use Mail;
 use App\Propierty;
 use App\Owner;
 use App\PropiertyImage;
 use App\PropiertyDocument;
 use DB;
+use Builder;
 
 
 class PropiertiesController extends Controller
@@ -37,24 +41,30 @@ class PropiertiesController extends Controller
      $result["total"]= $row[0];
 
      if($search){
-       $propierties = DB::table('propierties')
-                      ->join('propierty_descriptions','propierty_descriptions.id','=','propierties.propierty_description_id')
-                      ->join('use_types','propierties.use_type_id','=','use_types.id')
-                      ->join('adquisition_shapes','adquisition_shapes.id','propierties.adquisition_shape_id')
-                      ->join('support_documents','support_documents.id','=','propierties.support_document_id')
-                      ->join('owners','owners.id','=','propierties.owner_id')
-                      ->select('propierties.*','use_types.use_type','adquisition_shapes.adquisition_shape','propierty_descriptions.propierty_description','support_documents.support_document','owners.owner_name')
-                      ->where('propierties.inventory_number','LIKE','%'.$search.'%')
-                      ->orWhere('propierties.propierty_location','LIKE','%'.$search.'%')->skip($offset)->take($rows)->get();
+       $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
+                      ->where('inventory_number','LIKE','%'.$search.'%')
+                      ->orWhere('propierty_location','LIKE','%'.$search.'%')
+                      ->orWhere('surface','LIKE','%'.$search.'%')
+                      ->orWhere('book_value','LIKE','%'.$search.'%')
+                      ->orWhere('accounting_item','LIKE','%'.$search.'%')
+                      ->orWhere('notary_minutes','LIKE','%'.$search.'%')
+                      ->orWhere('rpp','LIKE','%'.$search.'%')
+                      ->orWhere('current_situation','LIKE','%'.$search.'%')
+                      ->orWhere('document_date','LIKE','%'.$search.'%')
+                      ->orwhereHas('use_type', function ($query) use($search) {
+                        $query->where('use_type', 'like', '%'.$search.'%');
+                      })
+                      ->orwhereHas('owner', function ($query) use($search) {
+                        $query->where('owner_name', 'like', '%'.$search.'%');
+                      })
+                      ->orwhereHas('propierty_description', function ($query) use($search) {
+                        $query->where('propierty_description', 'like', '%'.$search.'%');
+                      })
+                      ->orwhereHas('support_document', function ($query) use($search) {
+                        $query->where('support_document', 'like', '%'.$search.'%');
+                      })->skip($offset)->take($rows)->get();
       }else {
-        $propierties = DB::table('propierties')
-                       ->join('propierty_descriptions','propierty_descriptions.id','=','propierties.propierty_description_id')
-                       ->join('use_types','propierties.use_type_id','=','use_types.id')
-                       ->join('adquisition_shapes','adquisition_shapes.id','propierties.adquisition_shape_id')
-                       ->join('support_documents','support_documents.id','=','propierties.support_document_id')
-                       ->join('owners','owners.id','=','propierties.owner_id')
-                       ->select('propierties.*','use_types.use_type','adquisition_shapes.adquisition_shape','propierty_descriptions.propierty_description','support_documents.support_document','owners.owner_name')
-                       ->skip($offset)->take($rows)->get();
+        $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])->skip($offset)->take($rows)->get();
      }
      $items=array();
      foreach($propierties as $propierty){
@@ -113,6 +123,11 @@ class PropiertiesController extends Controller
       $propierty->adquisition_shape_id = $request->adquisition_shape_id;
       $propierty->support_document_id = $request->support_document_id;
       $propierty->save();
+
+      $users = User::orderBy('id')->get();
+      foreach ($users as $key => $user) {
+        Mail::to($user->email)->send(new NuevaInformacionPredio($propierty));
+      }
       if($request->images) {
         $destinationPath = public_path('images');
         $images= $request->images;
@@ -140,6 +155,10 @@ class PropiertiesController extends Controller
       $requestData=$request->all();
       $propierty=Propierty::findOrfail($id);
       $propierty->update($requestData);
+      $users = User::orderBy('id')->get();
+      foreach ($users as $key => $user) {
+        Mail::to($user->email)->send(new NuevaInformacionPredio($propierty));
+      }
       if($request->images){
         $destinationPath = public_path('images');
         $images= $request->images;
