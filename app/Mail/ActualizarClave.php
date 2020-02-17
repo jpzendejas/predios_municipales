@@ -28,7 +28,7 @@ class ActualizarClave extends Mailable
      */
     public function build()
     {
-      return $this->markdown('emails.update.password')->with('user_email', $this->user_email);
+      return $this->markdown('emails.passwords.update')->with('user_email', $this->user_email);
 
     }
 }

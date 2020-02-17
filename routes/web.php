@@ -50,3 +50,4 @@ Route::post('/update_use_type/{id}','UseTypesController@update_use_types');
 Route::get('/user_password_updates','UpdatePasswordsController@user_password_update');
 Route::get('/update_password','UpdatePasswordsController@update_passwords');
 Route::post('/password_update','UpdatePasswordsController@password_updates');
+Route::get('/send_links','UpdatePasswordsController@send_link');
