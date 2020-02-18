@@ -123,11 +123,6 @@ class PropiertiesController extends Controller
       $propierty->adquisition_shape_id = $request->adquisition_shape_id;
       $propierty->support_document_id = $request->support_document_id;
       $propierty->save();
-
-      $users = User::orderBy('id')->get();
-      foreach ($users as $key => $user) {
-        Mail::to($user->email)->send(new NuevaInformacionPredio($propierty));
-      }
       if($request->images) {
         $destinationPath = public_path('images');
         $images= $request->images;
@@ -148,6 +143,10 @@ class PropiertiesController extends Controller
         $document->propierty_id = $propierty->id;
         $document->document_name=$name;
         $document->save();
+        }
+        $users = User::orderBy('id')->get();
+        foreach ($users as $key => $user) {
+          Mail::to($user->email)->send(new NuevaInformacionPredio($propierty));
         }
       echo json_encode(array('success'=>true));
     }

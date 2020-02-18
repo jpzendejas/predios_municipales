@@ -26,8 +26,8 @@
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
       <div class="container px-4">
         <a class="navbar-brand" href="/">
-          Predios Municipales Salamanca, Gto.
-          <!-- <img src="{{asset('img/brand/white.png')}}" /> -->
+          <img src="{{asset('img/brand/logohorizontal.png')}}" style="width:260px; height:120px;"/>
+          <!-- Predios Municipales Salamanca, Gto. -->
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -53,7 +53,7 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link nav-link-icon" href="{{route('register')}}">
-                <i class="ni ni-circle-08"></i>
+                <!-- <i class="ni ni-circle-08"></i> -->
                 <!-- <span class="nav-link-inner--text">Registro</span> -->
               </a>
             </li>
@@ -96,7 +96,7 @@
       <div class="row align-items-center justify-content-xl-between">
         <div class="col-xl-6">
           <div class="copyright text-center text-xl-left text-muted">
-            &copy; 2020 <a href="/" class="font-weight-bold ml-1" target="_blank">Salamanca, Gto.</a>
+            &copy; 2020 <a href="/" class="font-weight-bold ml-1" target="_blank">Predios Municipales Salamanca, Gto.</a>
           </div>
         </div>
         <div class="col-xl-6">

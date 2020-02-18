@@ -31,7 +31,7 @@ $(document).ready(function(){
         {field:'adquisition_shape.adquisition_shape',title:'Forma de Adquisición',width:100,formatter:function(value,row){return row.adquisition_shape?.adquisition_shape}},
         {field:'propierty_description.propierty_description',title:'Descripción de Propiedad',width:100,formatter:function(value,row){return row.propierty_description?.propierty_description}},
         {field:'support_document.support_document',title:'Documento Soporte',width:100,formatter:function(value,row){return row.support_document?.support_document}},
-        {field:'use_type.use_type',title:'Tipo de Uso',width:100,align:'right',formatter:function(value,row){return row.use_type.use_type}}
+        {field:'use_type.use_type',title:'Tipo de Uso',width:100,align:'right',formatter:function(value,row){return row.use_type?.use_type}}
     ]]
   });
   var url;

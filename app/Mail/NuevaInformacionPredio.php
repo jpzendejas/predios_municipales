@@ -28,6 +28,6 @@ class NuevaInformacionPredio extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.propierties.newinfo')->with('citizen_support', $this->propierty);
+        return $this->markdown('emails.propierties.newinfo')->with('propierty', $this->propierty);
     }
 }
