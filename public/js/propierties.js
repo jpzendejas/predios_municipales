@@ -380,6 +380,8 @@ $(document).ready(function(){
     $('#listc').empty();
     $('#listd').empty();
     $('#liste').empty();
+    $('#listf').empty();
+
 
   var row = $('#dgp').datagrid('getSelected');
   if (row) {

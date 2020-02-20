@@ -14,8 +14,11 @@ use App\Propierty;
 use App\Owner;
 use App\PropiertyImage;
 use App\PropiertyDocument;
+use App\Imports\PropiertyImport;
 use DB;
 use Builder;
+use FastExcel;
+use Excel;
 
 
 class PropiertiesController extends Controller
@@ -207,6 +210,18 @@ class PropiertiesController extends Controller
     $propierties = Propierty::where('id', $id)->get();
     return view('propierties.propierty', compact('propierties'));
      // dd($propierty);
+  }
+
+  public function upload_files(){
+    return view('propierties.import');
+  }
+  public function import(Request $request){
+    $path1 = $request->file('file_upload')->store('temp');
+    $path=storage_path('app').'/'.$path1;
+    $data = \Excel::import(new PropiertyImport,$path);
+    //Excel::import(new PropiertyImport,request()->file('file'));
+    return back();
+
   }
 
 }
