@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc20dee3b9a4dc048a9cea5043657b06",
+    "content-hash": "ed92419b09c4d100f1bf781f5cf9f8ce",
     "packages": [
         {
             "name": "box/spout",
@@ -2629,25 +2629,25 @@
         },
         {
             "name": "rap2hpoutre/fast-excel",
-            "version": "v1.6.1",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rap2hpoutre/fast-excel.git",
-                "reference": "24abb21ecf25f50dca0b3554250688d758bee2c9"
+                "reference": "be62e7e8279d0877592a6f7190e1fcb81295909b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rap2hpoutre/fast-excel/zipball/24abb21ecf25f50dca0b3554250688d758bee2c9",
-                "reference": "24abb21ecf25f50dca0b3554250688d758bee2c9",
+                "url": "https://api.github.com/repos/rap2hpoutre/fast-excel/zipball/be62e7e8279d0877592a6f7190e1fcb81295909b",
+                "reference": "be62e7e8279d0877592a6f7190e1fcb81295909b",
                 "shasum": ""
             },
             "require": {
                 "box/spout": "^2.7",
-                "illuminate/database": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0",
-                "illuminate/support": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0",
+                "illuminate/support": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0",
                 "php": "^7.0"
             },
             "require-dev": {
+                "illuminate/database": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0",
                 "phpunit/phpunit": "^6.4"
             },
             "type": "library",
@@ -2684,7 +2684,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2019-12-23T07:57:53+00:00"
+            "time": "2020-02-20T11:02:08+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3985,20 +3985,20 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v2.0.1",
+            "version": "v1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "8cc682ac458d75557203b2f2f14b0b92e1c744ed"
+                "reference": "364518c132c95642e530d9b2d217acbc2ccac3e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/8cc682ac458d75557203b2f2f14b0b92e1c744ed",
-                "reference": "8cc682ac458d75557203b2f2f14b0b92e1c744ed",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/364518c132c95642e530d9b2d217acbc2ccac3e6",
+                "reference": "364518c132c95642e530d9b2d217acbc2ccac3e6",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.5"
+                "php": "^7.1.3"
             },
             "suggest": {
                 "symfony/translation-implementation": ""
@@ -4006,7 +4006,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -4038,7 +4038,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2019-11-18T17:27:11+00:00"
+            "time": "2019-09-17T11:12:18+00:00"
         },
         {
             "name": "symfony/var-dumper",
