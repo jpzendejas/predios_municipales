@@ -12,7 +12,7 @@
         </div>
     </div>
 <table id="dg" title="Documentos Soporte" class="easyui-datagrid" style="width:100%;height:140%;"
-            url="{{'/obtener_documentos_soporte'}}"
+            url="{{url('/obtener_documentos_soporte')}}"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>

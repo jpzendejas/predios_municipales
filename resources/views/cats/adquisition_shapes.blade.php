@@ -13,7 +13,7 @@
         </div>
     </div>
 <table id="dg" title="Status" class="easyui-datagrid" style="width:100%;height:140%;"
-            url="{{'/obtener_formas_adquisicion'}}"
+            url="{{url('/obtener_formas_adquisicion')}}"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>

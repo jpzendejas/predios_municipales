@@ -12,7 +12,7 @@
         </div>
     </div>
 <table id="dg" title="Tipos de Uso" class="easyui-datagrid" style="width:100%;height:140%;"
-            url="{{'/obtener_tipos_uso'}}"
+            url="{{url('/obtener_tipos_uso')}}"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>

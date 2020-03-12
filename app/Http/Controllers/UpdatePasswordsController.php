@@ -12,7 +12,8 @@ use Mail;
 class UpdatePasswordsController extends Controller
 {
     public function user_password_update(Request $request){
-      $users = User::orderBy('id')->where('department','==','catastro')->get();
+      $users = User::orderBy('id')->get();
+      dd($users);
       foreach ($users as $key => $user) {
       Mail::to($user->email)->send(new ActualizarClave($user));
       }
@@ -38,7 +39,7 @@ class UpdatePasswordsController extends Controller
       return redirect('login')->with($notification);
     }
     public function send_link(Request $request){
-      $users_emails = User::orderBy('id')->where('department',"catastro")->get();
+      $users_emails = User::orderBy('id')->get();
       // MAIL HERE
       // dd($users_emails);
       foreach ($users_emails as $key => $user_email) {

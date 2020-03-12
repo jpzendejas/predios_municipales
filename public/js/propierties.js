@@ -9,7 +9,7 @@ $(document).ready(function(){
   resizable: true
   });
   $('#dgp').datagrid({
-    url:'/obtener_propiedades',
+    url:'obtener_propiedades',
     columns:[[
         {field:'inventory_number',title:'Code',width:100},
         {field:'propierty_location',title:'Ubicación',width:100},
@@ -144,22 +144,22 @@ $(document).ready(function(){
     $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nueva Propiedad');
     $('#fm').form('clear');
     $('#propierty_description_id').combobox({
-      url:'/descripcion_propiedades',
+      url:'descripcion_propiedades',
       valueField:'id',
       textField:'propierty_description'
     });
     $('#use_type_id').combobox({
-      url:'/tipo_usos',
+      url:'tipo_usos',
       valueField:'id',
       textField:'use_type'
     });
     $('#adquisition_shape_id').combobox({
-      url:'/adquisicion_formas',
+      url:'adquisicion_formas',
       valueField:'id',
       textField:'adquisition_shape'
     });
     $('#owner_id').combobox({
-      url:'/propietarios',
+      url:'propietarios',
       valueField:'id',
       textField:'owner_name'
     });
@@ -184,12 +184,12 @@ $(document).ready(function(){
     }
   });
   $('#support_document_id').combobox({
-    url:'/soporte_documentos',
+    url:'soporte_documentos',
     valueField:'id',
     textField:'support_document'
   });
 
-      url = '/guardar_propiedad';
+      url = 'guardar_propiedad';
   }
   var savePropierty=function(){
       $('#fm').form('submit',{
@@ -321,25 +321,25 @@ $(document).ready(function(){
       $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Empresa');
       $('#fm').form('load',row);
       $('#propierty_description_id').combobox({
-        url:'/descripcion_propiedades',
+        url:'descripcion_propiedades',
         valueField:'id',
         textField:'propierty_description',
         value:row.propierty_description_id
       });
       $('#use_type_id').combobox({
-        url:'/tipo_usos',
+        url:'tipo_usos',
         valueField:'id',
         textField:'use_type',
         value:row.use_type_id,
       });
       $('#adquisition_shape_id').combobox({
-        url:'/adquisicion_formas',
+        url:'adquisicion_formas',
         valueField:'id',
         textField:'adquisition_shape',
         value:row.adquisition_shape_id
         });
         $('#owner_id').combobox({
-          url:'/propietarios',
+          url:'propietarios',
           valueField:'id',
           textField:'owner_name',
           value:row.owner_id
@@ -365,7 +365,7 @@ $(document).ready(function(){
               }
             });
     $('#support_document_id').combobox({
-      url:'/soporte_documentos',
+      url:'soporte_documentos',
       valueField:'id',
       textField:'support_document',
       value:row.support_document_id
@@ -397,7 +397,7 @@ $(document).ready(function(){
     $.ajax({
       method:'GET',
       dataType:'json',
-      url:"/obterner_predio/"+id,
+      url:"obterner_predio/"+id,
       success: function(response){
         $.each(response, function(index, value){
           $('#lista').append('<label>Numero de Inventario: <strong>'+value.inventory_number+'</strong></label>');
@@ -434,7 +434,7 @@ $(document).ready(function(){
     $.ajax({
       method:'GET',
       dataType:"json",
-      url:"/obtener_imagenes/"+id,
+      url:"obtener_imagenes/"+id,
       success: function(response){
         console.log(response);
         $.each(response, function(index, value){
@@ -449,7 +449,7 @@ $(document).ready(function(){
     $.ajax({
       method:'GET',
       dataType:"json",
-      url:"/obtener_documentos/"+id,
+      url:"obtener_documentos/"+id,
       success:function(response){
         $.each(response, function(index, value){
           $('#liste').append('<br><a href="http://127.0.0.1:8000/documents/'+value.document_name+'" target="_blank">Documento</a>');

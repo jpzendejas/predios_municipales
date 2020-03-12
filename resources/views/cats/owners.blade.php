@@ -13,7 +13,7 @@
         </div>
     </div>
 <table id="dg" title="Propietarios" class="easyui-datagrid" style="width:100%;height:140%;"
-            url="{{'/obtener_propietarios'}}"
+            url="{{url('/obtener_propietarios')}}"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
