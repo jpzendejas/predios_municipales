@@ -211,6 +211,7 @@ $(document).ready(function(){
               } else {
                   $('#dlg').dialog('close');        // close the dialog
                   $('#dg').datagrid('reload');    // reload the user data
+                  reload_page();
               }
           }
       });
@@ -467,6 +468,9 @@ var searchPropierty = function(){
   $('#dgp').datagrid('load',{
     search:$('#search').val()
   })
+}
+function reload_page(){
+  location.reload();
 }
 
 $('#newPropierty').on('click', newPropierty);

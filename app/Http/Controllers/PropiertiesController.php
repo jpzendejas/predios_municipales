@@ -19,6 +19,8 @@ use DB;
 use Builder;
 use FastExcel;
 use Excel;
+use App\LogActivityPropierty;
+use Auth;
 
 
 class PropiertiesController extends Controller
@@ -126,6 +128,15 @@ class PropiertiesController extends Controller
       $propierty->adquisition_shape_id = $request->adquisition_shape_id;
       $propierty->support_document_id = $request->support_document_id;
       $propierty->save();
+
+      $user_id = Auth::user()->id;
+      $log_activity_propierty = new LogActivityPropierty();
+      $log_activity_propierty->activity = "Create";
+      $log_activity_propierty->description = "Creación de un nuevo predio municipal";
+      $log_activity_propierty->user_id = $user_id;
+      $log_activity_propierty->propierty_id = $propierty->id;
+      $log_activity_propierty->save();
+
       if($request->images) {
         $destinationPath = public_path('images');
         $images= $request->images;
@@ -157,6 +168,15 @@ class PropiertiesController extends Controller
       $requestData=$request->all();
       $propierty=Propierty::findOrfail($id);
       $propierty->update($requestData);
+
+      $user_id = Auth::user()->id;
+      $log_activity_propierty = new LogActivityPropierty();
+      $log_activity_propierty->activity = "Update";
+      $log_activity_propierty->description = "Actualización de predio municipal";
+      $log_activity_propierty->user_id = $user_id;
+      $log_activity_propierty->propierty_id = $id;
+      $log_activity_propierty->save();
+
       $users = User::orderBy('id')->get();
       foreach ($users as $key => $user) {
         Mail::to($user->email)->send(new NuevaInformacionPredio($propierty));
