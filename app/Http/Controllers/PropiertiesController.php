@@ -241,7 +241,11 @@ class PropiertiesController extends Controller
     $data = \Excel::import(new PropiertyImport,$path);
     //Excel::import(new PropiertyImport,request()->file('file'));
     return back();
+  }
 
+  public function search_propierties(Request $request){
+
+    return view('propierties.search');
   }
 
 }

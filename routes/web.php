@@ -53,3 +53,4 @@ Route::post('/password_update','UpdatePasswordsController@password_updates');
 Route::get('/send_links','UpdatePasswordsController@send_link');
 Route::get('/upload_file','PropiertiesController@upload_files');
 Route::post('import', 'PropiertiesController@import')->name('import');
+Route::get('/buscar_predio','PropiertiesController@search_propierties');

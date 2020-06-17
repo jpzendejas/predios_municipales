@@ -39,8 +39,8 @@
                 <th field="owner_name" width="50">Nombre del Propietario</th>
                 <th field="observations" width="50">Observaciones</th>
             </tr>
-        </thead>
-    </table> -->
+        </thead>-->
+    </table>
     <div id="toolbar">
         <a href="javascript:void(0)" id="newPropierty" class="easyui-linkbutton" iconCls="icon-add" plain="true" >Nueva Propiedad</a>
         <a href="javascript:void(0)" id="editPropierty" class="easyui-linkbutton" iconCls="icon-edit" plain="true" >Editar Propiedad</a>
