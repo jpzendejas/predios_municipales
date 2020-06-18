@@ -46,9 +46,8 @@ class PropiertiesController extends Controller
      $rs=mysqli_query($connection,$sql);
      $row=mysqli_fetch_row($rs);
      $result["total"]= $row[0];
-
-     if($search){
-       $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
+     if($search && $min_long == null && $max_long == null){
+                      $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
                       ->where('inventory_number','LIKE','%'.$search.'%')
                       ->orWhere('propierty_location','LIKE','%'.$search.'%')
                       ->orWhere('surface','LIKE','%'.$search.'%')
@@ -70,32 +69,13 @@ class PropiertiesController extends Controller
                       ->orwhereHas('support_document', function ($query) use($search) {
                         $query->where('support_document', 'like', '%'.$search.'%');
                       })->skip($offset)->take($rows)->get();
-      }elseif ($min_long && $max_long) {
-        Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
+      }elseif ($min_long != null &&  $max_long != null) {
+        $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
                       ->whereBetween('surface',[$min_long, $max_long])
-                       ->where('inventory_number','LIKE','%'.$search.'%')
-                       ->orWhere('propierty_location','LIKE','%'.$search.'%')
-                       ->orWhere('surface','LIKE','%'.$search.'%')
-                       ->orWhere('book_value','LIKE','%'.$search.'%')
-                       ->orWhere('accounting_item','LIKE','%'.$search.'%')
-                       ->orWhere('notary_minutes','LIKE','%'.$search.'%')
-                       ->orWhere('rpp','LIKE','%'.$search.'%')
-                       ->orWhere('current_situation','LIKE','%'.$search.'%')
-                       ->orWhere('document_date','LIKE','%'.$search.'%')
-                       ->orwhereHas('use_type', function ($query) use($search) {
-                         $query->where('use_type', 'like', '%'.$search.'%');
-                       })
-                       ->orwhereHas('owner', function ($query) use($search) {
-                         $query->where('owner_name', 'like', '%'.$search.'%');
-                       })
-                       ->orwhereHas('propierty_description', function ($query) use($search) {
-                         $query->where('propierty_description', 'like', '%'.$search.'%');
-                       })
-                       ->orwhereHas('support_document', function ($query) use($search) {
-                         $query->where('support_document', 'like', '%'.$search.'%');
-                       })->skip($offset)->take($rows)->get();
+                      ->skip($offset)->take($rows)->get();
       }
       else {
+
         $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])->skip($offset)->take($rows)->get();
      }
      $items=array();
