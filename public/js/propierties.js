@@ -40,6 +40,7 @@ $(document).ready(function(){
       console.log('The value has been changed to ' + value);
     }
   });
+
   var newPropierty=function(){
     var department = $('#department').val();
     if(department == 'oterritorial') {
@@ -466,7 +467,9 @@ $(document).ready(function(){
 var searchPropierty = function(){
   var search = $('#search').val();
   $('#dgp').datagrid('load',{
-    search:$('#search').val()
+    search:$('#search').val(),
+    min_long:$('#min_long').val(),
+    max_long:$('#max_long').val(),
   })
 }
 function reload_page(){

@@ -81,11 +81,6 @@
       <!-- Navigation -->
       <ul class="navbar-nav mb-md-3">
         <li class="nav-item">
-          <a class="nav-link" href="{{url('buscar_predio')}}">
-            <i class="ni ni-world text-primary"></i> Buscar predios
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="https://trello.com/b/w8GJuYBH/predios-municipales-salamanca" target="_blank">
             <i class="ni ni-collection text-yellow"></i> Acitividades
           </a>

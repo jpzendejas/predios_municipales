@@ -46,11 +46,14 @@
         <a href="javascript:void(0)" id="editPropierty" class="easyui-linkbutton" iconCls="icon-edit" plain="true" >Editar Propiedad</a>
         <a href="javascript:void(0)" id="viewPropierty" class="easyui-linkbutton" iconCls="icon-help" plain="true" >Ver Predio Municipal</a>
         <span>Buscar:</span>
-        <input id="search" name="search" class="easyui-textbox"  style="width:15%">
+        <input id="search" name="search" class="easyui-textbox"  style="width:13%">
+        <span>Superficie -:</span>
+        <input id="min_long" name="min_long" class="easyui-numberbox"  style="width:10%">
+        <span>Superficie +:</span>
+        <input id="max_long" name="max_long" class="easyui-numberbox"  style="width:10%">
         <a href="javascript:void(0)" id="searchPropierty" class="easyui-linkbutton" iconCls="icon-search" plain="true" ></a>
-
-
-    </div>
+        <hr>
+        </div>
     <div id="dlg" class="easyui-dialog" style="width:600px; height:100%;" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
         <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px" enctype="multipart/form-data">
           <input type="hidden" name="department" id="department" value="{{auth()->user()->department}}">
