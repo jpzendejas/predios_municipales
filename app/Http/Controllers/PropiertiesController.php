@@ -70,7 +70,7 @@ class PropiertiesController extends Controller
                       ->orwhereHas('support_document', function ($query) use($search) {
                         $query->where('support_document', 'like', '%'.$search.'%');
                       })->skip($offset)->take($rows)->get();
-      }elseif ($search && $min_long && $max_long) {
+      }elseif ($min_long && $max_long) {
         Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
                       ->whereBetween('surface',[$min_long, $max_long])
                        ->where('inventory_number','LIKE','%'.$search.'%')
