@@ -10,7 +10,7 @@
 <hr class="my-3">
 <h6 class="navbar-heading text-muted">Catalogos</h6>
 <ul class="navbar-nav">
-@if(auth()->user()->department == 'dgti')
+@if(auth()->user()->department == 'dgti' || auth()->user()->department == 'juridico')
 <li class="nav-item">
   <a class="nav-link" href="{{url('formas_adquisicion')}}">
     <i class="ni ni-atom text-info"></i> Formas de Adquisición
