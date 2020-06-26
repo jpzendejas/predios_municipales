@@ -425,7 +425,7 @@ $(document).ready(function(){
           $('#listb').append('<br><label>Documento Soporte: <strong>'+value.support_document.support_document+'</strong></label>');
           $('#listc').append('<label><strong>'+value.observations+'</strong></label>');
           $('#listf').append('<label><strong>Vista en Maps: </strong></label>');
-          $('#listf').append('<br><a href="https://www.google.com/maps/place/'+value.propierty_location+'" target="_blank">Mapa</a>');
+          $('#listf').append('<br><a href="https://earth.google.com/web/search/'+value.propierty_location+'Salamanca, Gto., México" target="_blank">Mapa</a>');
         });
       }
     });
