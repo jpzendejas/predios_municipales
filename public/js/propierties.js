@@ -103,7 +103,7 @@ $(document).ready(function(){
       $('#book_value').textbox({disabled:'true'});
       $('#accounting_item').textbox({disabled:'true'});
       $('#document_number').textbox({disabled:'true'});
-      $('#propierty_account').textbox({disabled:'true'});
+      $('#propierty_account').textbox({disabled:'false'});
       $('#current_situation').textbox({disabled:'true'});
       $('#owner_name').textbox({disabled:'true'});//catastro
     }
@@ -281,7 +281,7 @@ $(document).ready(function(){
         $('#book_value').textbox({disabled:'true'});
         $('#accounting_item').textbox({disabled:'true'});
         $('#document_number').textbox({disabled:'true'});
-        $('#propierty_account').textbox({disabled:'true'});
+        $('#propierty_account').textbox({disabled:'false'});
         $('#current_situation').textbox({disabled:'true'});
         $('#owner_name').textbox({disabled:'true'});//catastro
       }
