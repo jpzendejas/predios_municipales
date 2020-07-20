@@ -40,8 +40,7 @@ $(document).ready(function(){
     var row = $('#dgp').datagrid('getSelected');
     if (row) {
       get_modal_documents(row.id);
-      $('#exampleModal').modal('show');
-      }
+    }
 	}
 });
   var url;
@@ -475,12 +474,18 @@ $(document).ready(function(){
       dataType:"json",
       url:"obtener_documentos/"+id,
       success:function(response){
-        $.each(response, function(index, value){
-          $('#documents_list').append('<li><input type="checkbox" id="'+index+'" name="ids[]" value="'+value.id+'"><label for="'+index+'">Documento: '+index+'</label></li>');
-          $('#documents_view').append('<li><a href="http://salamanca.gob.mx/predios_municipales/public/documents/'+value.document_name+'" target="_blank">Documento</a></li>');
-
-        });
+        if(response.length == 0) {
+          toastr.warning('Para este predio aún no hay documentos registrados');
+        }else {
+          $('#documents_list').empty();
+          $('#documents_view').empty();
+          $('#exampleModal').modal('show');
+          $.each(response, function(index, value){
+            $('#documents_list').append('<li><input type="checkbox" id="'+index+'" name="ids[]" value="'+value.id+'"><label for="'+index+'">Documento: '+index+'</label></li>');
+            $('#documents_view').append('<li><a href="http://salamanca.gob.mx/predios_municipales/public/documents/'+value.document_name+'" target="_blank">Documento</a></li>');
+          });
       }
+    }
     });
   }
   function get_maps_location(location,ext_number,int_number){
