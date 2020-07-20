@@ -110,6 +110,7 @@ class PropiertiesController extends Controller
     }
 
     public function save_propierties(Request $request){
+
       $propierty = new Propierty();
       $propierty->inventory_number = $request->inventory_number;
       $propierty->propierty_location = $request->propierty_location;
@@ -155,15 +156,17 @@ class PropiertiesController extends Controller
           $im->image=$name;
           $im->save();
         }
-      }if($request->pdf){
+      }if($request->pdfs){
         $destinationPath= public_path('documents');
-        $pdf =$request->file('pdf');
-        $name = $pdf->getClientOriginalName();
-        $pdf->move($destinationPath, $name);
-        $document = new PropiertyDocument();
-        $document->propierty_id = $propierty->id;
-        $document->document_name=$name;
-        $document->save();
+        $pdfs=$request->file('pdfs');
+        foreach ($pdfs as $key => $pdf) {
+          $name = $pdf->getClientOriginalName();
+          $pdf->move($destinationPath, $name);
+          $document = new PropiertyDocument();
+          $document->propierty_id = $propierty->id;
+          $document->document_name=$name;
+          $document->save();
+        }
         }
         $users = User::orderBy('id')->get();
         foreach ($users as $key => $user) {
@@ -200,15 +203,17 @@ class PropiertiesController extends Controller
           $im->save();
         }
       }
-      if ($request->pdf) {
+      if ($request->pdfs) {
           $destinationPath= public_path('documents');
-          $pdf =$request->file('pdf');
-          $name = $pdf->getClientOriginalName();
-          $pdf->move($destinationPath, $name);
-          $document = new PropiertyDocument();
-          $document->propierty_id = $id;
-          $document->document_name=$name;
-          $document->save();
+          $pdfs =$request->file('pdfs');
+          foreach ($pdfs as $key => $pdf) {
+            $name = $pdf->getClientOriginalName();
+            $pdf->move($destinationPath, $name);
+            $document = new PropiertyDocument();
+            $document->propierty_id = $propierty->id;
+            $document->document_name=$name;
+            $document->save();
+          }
       }
       echo json_encode(array('success'=>true));
   }
@@ -253,6 +258,22 @@ class PropiertiesController extends Controller
   public function search_propierties(Request $request){
 
     return view('propierties.search');
+  }
+
+  public function destroy_documents(Request $request){
+    if ($request) {
+      $ids = $request->ids;
+      for ($i=0; $i < sizeof($request->ids) ; $i++) {
+          $document = PropiertyDocument::find($ids[$i]);
+          $document->delete();
+      }
+      $notification = array(
+        'message' =>'Documentos eliminados correctamente',
+        'alert-type' => 'success'
+      );
+      return back()->with($notification);
+    }
+
   }
 
 }

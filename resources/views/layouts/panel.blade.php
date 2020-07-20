@@ -22,6 +22,8 @@
   <!-- <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css"> -->
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+  <link type="text/css" href="{{asset('js/toastr.min.css')}}" rel="stylesheet">
+
   <script>
        $.extend($.fn.datagrid.defaults, {
          loader: function(param, success, error){
@@ -161,6 +163,55 @@
       @include('includes.panel.footer')
     </div>
   </div>
+
+  <!--Documents Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Documentos del Predio:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form role="form" method="POST" action="{{url('eliminar_documentos')}}">
+          @csrf
+        <div class="form-group">
+          <div class="input-group input-group-alternative mb-3">
+            <div class="input-group-prepend">
+              <!-- <span class="input-group-text"><i class="ni ni-hat-3"></i></span> -->
+            </div>
+              <div class="row">
+                <div class="col-sm-8">
+                    <!-- <span>Seleccionar documentos:</span> -->
+                    <ul id="documents_list">
+
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <!-- <span>Ver documento</span> -->
+                    <ul id="documents_view">
+
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-default mt-4">Eliminar Documentos</button>
+        </div>
+        <br>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+        <!-- <button type="button" class="btn btn-default">Borrar Documentos</button> -->
+      </div>
+    </div>
+    </div>
+  </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <!-- <script src="{{asset('vendor/jquery/dist/jquery.min.js')}}"></script> -->
@@ -170,6 +221,8 @@
   <script src="{{asset('vendor/chart.js/dist/Chart.extension.js')}}"></script>
   <!-- Argon JS -->
   <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
+  <script src="{{asset('js/toastr.min.js')}}"></script>
+
   <!-- more js's -->
   <script src="{{asset('js/propierties.js')}}"></script>
   <script src="{{asset('js/adquisition_shapes.js')}}"></script>
@@ -184,5 +237,45 @@
 
 
 </body>
+<script>
+toastr.options = {
+"closeButton": false,
+"debug": false,
+"newestOnTop": false,
+"progressBar": false,
+"positionClass": "toast-bottom-right",
+"preventDuplicates": false,
+"onclick": null,
+"showDuration": "300",
+"hideDuration": "1000",
+"timeOut": "5000",
+"extendedTimeOut": "1000",
+"showEasing": "swing",
+"hideEasing": "linear",
+"showMethod": "fadeIn",
+"hideMethod": "fadeOut"
+}
+@if(Session::has('message'))
+var type = "{{ Session::get('alert-type', 'info') }}";
+switch(type){
+  case 'info':
+  toastr.info("{{ Session::get('message') }}");
+  break;
+
+  case 'warning':
+  toastr.warning("{{ Session::get('message') }}");
+  break;
+
+  case 'success':
+  toastr.success("{{ Session::get('message') }}");
+  break;
+
+  case 'error':
+  toastr.error("{{ Session::get('message') }}");
+  break;
+}
+@endif
+
+</script>
 
 </html>

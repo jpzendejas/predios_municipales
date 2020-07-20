@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   $('#dd').dialog({
   title: 'My Dialog',
   width: 700,
@@ -34,6 +35,15 @@ $(document).ready(function(){
         {field:'use_type.use_type',title:'Tipo de Uso',width:100,align:'right',formatter:function(value,row){return row.use_type?.use_type}}
     ]]
   });
+  $('#dgp').datagrid({
+	onDblClickRow:function(){
+    var row = $('#dgp').datagrid('getSelected');
+    if (row) {
+      get_modal_documents(row.id);
+      $('#exampleModal').modal('show');
+      }
+	}
+});
   var url;
   $('#search').textbox({
     onKeypress: function(value){
@@ -455,6 +465,20 @@ $(document).ready(function(){
       success:function(response){
         $.each(response, function(index, value){
           $('#liste').append('<br><a href="http://salamanca.gob.mx/predios_municipales/public/documents/'+value.document_name+'" target="_blank">Documento</a>');
+        });
+      }
+    });
+  }
+  function get_modal_documents(id){
+    $.ajax({
+      method:'GET',
+      dataType:"json",
+      url:"obtener_documentos/"+id,
+      success:function(response){
+        $.each(response, function(index, value){
+          $('#documents_list').append('<li><input type="checkbox" id="'+index+'" name="ids[]" value="'+value.id+'"><label for="'+index+'">Documento: '+index+'</label></li>');
+          $('#documents_view').append('<li><a href="http://salamanca.gob.mx/predios_municipales/public/documents/'+value.document_name+'" target="_blank">Documento</a></li>');
+
         });
       }
     });

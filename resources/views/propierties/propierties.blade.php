@@ -231,7 +231,7 @@
             <div class="col-sm-6">
               <div style="margin-bottom:10px">
                 <span>PDF</span>
-                <input id="pdf" name="pdf" type="file"  style="width:100%">
+                <input id="pdfs" name="pdfs[]" type="file"  style="width:100%" multiple>
               </div>
             </div>
           </div>
