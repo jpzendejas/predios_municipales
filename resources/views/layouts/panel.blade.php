@@ -211,6 +211,57 @@
       </div>
     </div>
     </div>
+<!-- Modal documents end -->
+
+<!--Images Modal -->
+<div class="modal fade" id="exampleModalB" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelB" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Imagenes del Predio:</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form role="form" method="POST" action="{{url('eliminar_imagenes')}}">
+        @csrf
+      <div class="form-group">
+        <div class="input-group input-group-alternative mb-3">
+          <div class="input-group-prepend">
+            <!-- <span class="input-group-text"><i class="ni ni-hat-3"></i></span> -->
+          </div>
+            <div class="row">
+              <div class="col-sm-8">
+                  <!-- <span>Seleccionar documentos:</span> -->
+                  <ul id="images_list">
+
+                  </ul>
+              </div>
+              <div class="col-sm-4">
+                  <!-- <span>Ver documento</span> -->
+                  <ul id="images_view">
+
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-default mt-4">Eliminar Imagenes</button>
+      </div>
+      <br>
+    </form>
+    </div>
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+      <!-- <button type="button" class="btn btn-default">Borrar Documentos</button> -->
+    </div>
+  </div>
+  </div>
+<!-- Modal images end -->
+
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->

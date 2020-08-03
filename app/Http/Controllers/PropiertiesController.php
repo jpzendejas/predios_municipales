@@ -276,4 +276,19 @@ class PropiertiesController extends Controller
 
   }
 
+  public function destroy_images(Request $request){
+    if ($request) {
+      $ids = $request->img_ids;
+      for ($i=0; $i < sizeof($request->img_ids) ; $i++) {
+          $document = PropiertyImage::find($ids[$i]);
+          $document->delete();
+      }
+      $notification = array(
+        'message' =>'Imagenes eliminadas correctamente',
+        'alert-type' => 'success'
+      );
+      return back()->with($notification);
+    }
+  }
+
 }

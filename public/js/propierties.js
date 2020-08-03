@@ -38,8 +38,9 @@ $(document).ready(function(){
   $('#dgp').datagrid({
 	onDblClickRow:function(){
     var row = $('#dgp').datagrid('getSelected');
+    // get_modal_documents(row.id);
     if (row) {
-      get_modal_documents(row.id);
+    $('#dlg-menu').dialog('open').dialog('center').dialog('setTitle','Menú');
     }
 	}
 });
@@ -505,11 +506,51 @@ function reload_page(){
   location.reload();
 }
 
+var deleteDocument = function(){
+  var row = $('#dgp').datagrid('getSelected');
+  if (row) {
+    $('#dlg-menu').dialog('close');        // close the dialog
+    get_modal_documents(row.id);
+  }
+}
+var deleteImage = function(){
+  var row = $('#dgp').datagrid('getSelected');
+  if (row) {
+    $('#dlg-menu').dialog('close');        // close the dialog
+    get_modal_images(row.id);
+  }
+}
+
+function get_modal_images(id){
+  var ind;
+  $.ajax({
+    method:'GET',
+    dataType:"json",
+    url:"obtener_imagenes/"+id,
+    success: function(response){
+      console.log(response);
+        if(response.length == 0) {
+          toastr.warning('Para este predio aún no hay imagenes registradas');
+        }else {
+          $('#images_list').empty();
+          $('#images_view').empty();
+          $('#exampleModalB').modal('show');
+          $.each(response, function(index, value){
+            $('#images_list').append('<li><input type="checkbox" id="'+index+'" name="img_ids[]" value="'+value.id+'"><label for="'+index+'">Imagen: '+index+'</label></li>');
+            $('#images_view').append('<li><a href="http://salamanca.gob.mx/predios_municipales/public/images/'+value.image+'" target="_blank">Imagen</a></li>');
+          });
+        }
+    }
+  });
+}
+
 $('#newPropierty').on('click', newPropierty);
 $('#savePropierty').on('click', savePropierty);
 $('#editPropierty').on('click', editPropierty);
 $('#viewPropierty').on('click', viewPropierty);
 $('#searchPropierty').on('click', searchPropierty);
+$('#deleteDocument').on('click', deleteDocument);
+$('#deleteImage').on('click', deleteImage);
 
 
 });
