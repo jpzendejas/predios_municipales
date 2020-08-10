@@ -31,6 +31,8 @@ class PropiertiesController extends Controller
     public function get_propierties(Request $request){
     $page= isset($_POST['page']) ? intval($_POST['page']):1;
      $rows= isset($_POST['rows']) ? intval($_POST['rows']):10;
+     $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id';
+     $order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';
      $search = $request->search;
      $min_long = $request->min_long;
      $max_long = $request->max_long;
@@ -47,7 +49,7 @@ class PropiertiesController extends Controller
      $row=mysqli_fetch_row($rs);
      $result["total"]= $row[0];
      if($search && $min_long == null && $max_long == null){
-                      $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
+                      $propierties = Propierty::orderBy($sort, $order)->with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
                       ->where('inventory_number','LIKE','%'.$search.'%')
                       ->orWhere('propierty_location','LIKE','%'.$search.'%')
                       ->orWhere('surface','LIKE','%'.$search.'%')
@@ -70,13 +72,13 @@ class PropiertiesController extends Controller
                         $query->where('support_document', 'like', '%'.$search.'%');
                       })->skip($offset)->take($rows)->get();
       }elseif ($min_long != null &&  $max_long != null) {
-        $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
+        $propierties = Propierty::orderBy($sort, $order)->with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
                       ->whereBetween('surface',[$min_long, $max_long])
                       ->skip($offset)->take($rows)->get();
       }
       else {
 
-        $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])->skip($offset)->take($rows)->get();
+        $propierties = Propierty::orderBy($sort, $order)->with(['use_type','owner','adquisition_shape','propierty_description','support_document'])->skip($offset)->take($rows)->get();
      }
      $items=array();
      foreach($propierties as $propierty){
