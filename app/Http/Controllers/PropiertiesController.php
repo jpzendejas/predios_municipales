@@ -21,12 +21,14 @@ use FastExcel;
 use Excel;
 use App\LogActivityPropierty;
 use Auth;
+use App\Classes\Coordinates;
+use Redirect;
 
 
 class PropiertiesController extends Controller
 {
     public function index(Request $request){
-      return view('propierties.propierties');
+    return view('propierties.propierties');
     }
     public function get_propierties(Request $request){
     $page= isset($_POST['page']) ? intval($_POST['page']):1;
@@ -290,6 +292,24 @@ class PropiertiesController extends Controller
         'alert-type' => 'success'
       );
       return back()->with($notification);
+    }
+  }
+
+  public function get_lat_long_coordinates(Request $request,$utm_coordinates){
+    if ($utm_coordinates) {
+      $utm_str=explode(';', $utm_coordinates);
+      $utm_str_lat = str_replace("x:","",$utm_str[0]);
+      $utm_str_lon = str_replace("y:","",$utm_str[1]);
+      $coordinates = new Coordinates();
+      $lat_lon = $coordinates->utm2ll($utm_str_lat,$utm_str_lon,14,true);
+      if($lat_lon) {
+        $lat_lon_arr=explode(',',$lat_lon);
+        $lat_coor = str_replace('"attr":{"lat":',"",$lat_lon_arr[1]);
+        $lon_str = str_replace('"lon":',"",$lat_lon_arr[2]);
+        $lon_coor = str_replace('}}',"",$lon_str);
+        $lat_lon_coor = $lat_coor.",".$lon_coor;
+        return json_encode($lat_lon_coor);
+      }
     }
   }
 

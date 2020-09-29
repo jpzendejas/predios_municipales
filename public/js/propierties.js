@@ -21,6 +21,7 @@ $(document).ready(function(){
         {field:'accounting_item',title:'Partida Contable',sortable:'true',width:100},
         {field:'notary_minutes',title:'Acta Notarial',sortable:'true',width:100},
         {field:'rpp',title:'RPP',sortable:'true',width:100},
+        {field:'utm_coordinates',title:'Coordenadas UTM',sortable:'true',width:100},
         {field:'current_situation',title:'Situación Actual',sortable:'true',width:100},
         {field:'notary',title:'Notario',sortable:'true',width:100},
         {field:'document_date',title:'Fecha de Escritura',sortable:'true',width:100},
@@ -544,6 +545,30 @@ function get_modal_images(id){
   });
 }
 
+var locationPlace = function(){
+  var row = $('#dgp').datagrid('getSelected');
+  if (row) {
+    $('#dlg-menu').dialog('close');        // close the dialog
+    if (row.utm_coordinates == null) {
+      toastr.warning('Para este predio aún no hay coordenadas registradas');
+    }else {
+      convertCoordinates(row.utm_coordinates);
+    }
+  }
+}
+function convertCoordinates(utm_coordinates){
+  if (utm_coordinates) {
+    $.ajax({
+      method:'GET',
+      dataType:"json",
+      url:"obtener_coordenadas/"+utm_coordinates,
+      success: function(data){
+        window.open("https://earth.google.com/web/search/20.55779984255917,-101.19772148141656/", "_blank");
+      }
+    });
+  }
+}
+
 $('#newPropierty').on('click', newPropierty);
 $('#savePropierty').on('click', savePropierty);
 $('#editPropierty').on('click', editPropierty);
@@ -551,6 +576,7 @@ $('#viewPropierty').on('click', viewPropierty);
 $('#searchPropierty').on('click', searchPropierty);
 $('#deleteDocument').on('click', deleteDocument);
 $('#deleteImage').on('click', deleteImage);
+$('#locationPlace').on('click', locationPlace);
 
 
 });

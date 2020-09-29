@@ -54,10 +54,12 @@
         <a href="javascript:void(0)" id="searchPropierty" class="easyui-linkbutton" iconCls="icon-search" plain="true" ></a>
         <hr>
     </div>
-    <div id="dlg-menu" class="easyui-dialog" style="width:200px; height:15%;" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
+    <div id="dlg-menu" class="easyui-dialog" style="width:300px; height:15%;" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
       <center>
       <a href="javascript:void(0)" id="deleteDocument" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-large-smartart',size:'large',iconAlign:'top'">Documentos</a>
       <a href="javascript:void(0)" id="deleteImage" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-large-picture',size:'large',iconAlign:'top'">Imagenes</a>
+      <a href="javascript:void(0)" id="locationPlace" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'">Ubicación</a>
+
     </center>
     </div>
     <div id="dlg" class="easyui-dialog" style="width:600px; height:100%;" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">

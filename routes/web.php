@@ -56,3 +56,4 @@ Route::post('import', 'PropiertiesController@import')->name('import');
 Route::get('/buscar_predio','PropiertiesController@search_propierties');
 Route::post('/eliminar_documentos','PropiertiesController@destroy_documents');
 Route::post('/eliminar_imagenes','PropiertiesController@destroy_images');
+Route::get('/obtener_coordenadas/{utm_coordinates}','PropiertiesController@get_lat_long_coordinates');
