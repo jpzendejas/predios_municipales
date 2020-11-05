@@ -563,7 +563,8 @@ function convertCoordinates(utm_coordinates){
       dataType:"json",
       url:"obtener_coordenadas/"+utm_coordinates,
       success: function(data){
-        window.open("https://earth.google.com/web/search/20.55779984255917,-101.19772148141656/", "_blank");
+        console.log(data);
+        window.open("https://earth.google.com/web/search/"+data+"/", "_blank");
       }
     });
   }
