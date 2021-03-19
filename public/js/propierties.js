@@ -452,11 +452,7 @@ $(document).ready(function(){
         console.log(response);
         $.each(response, function(index, value){
           ind = index+1;
-<<<<<<< HEAD
           $('#listd').append('<br><a href="http://201.150.252.130:81/images/'+value.image+'" target="_blank">Imagen '+ind+'</a>');
-=======
-          $('#listd').append('<br><a href="http://salamanca.gob.mx/predios_municipales/public/images/'+value.image+'" target="_blank">Imagen '+ind+'</a>');
->>>>>>> 164c508c148e24118d00869a50b3035600cece4f
         });
       }
     });
@@ -469,11 +465,7 @@ $(document).ready(function(){
       url:"obtener_documentos/"+id,
       success:function(response){
         $.each(response, function(index, value){
-<<<<<<< HEAD
           $('#liste').append('<br><a href="http://201.150.252.130:81/documents/'+value.document_name+'" target="_blank">Documento</a>');
-=======
-          $('#liste').append('<br><a href="http://salamanca.gob.mx/predios_municipales/public/documents/'+value.document_name+'" target="_blank">Documento</a>');
->>>>>>> 164c508c148e24118d00869a50b3035600cece4f
         });
       }
     });
