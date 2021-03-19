@@ -21,17 +21,23 @@ use FastExcel;
 use Excel;
 use App\LogActivityPropierty;
 use Auth;
+use App\Classes\Coordinates;
+use Redirect;
 
 
 class PropiertiesController extends Controller
 {
     public function index(Request $request){
-      return view('propierties.propierties');
+    return view('propierties.propierties');
     }
     public function get_propierties(Request $request){
     $page= isset($_POST['page']) ? intval($_POST['page']):1;
      $rows= isset($_POST['rows']) ? intval($_POST['rows']):10;
+     $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id';
+     $order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';
      $search = $request->search;
+     $min_long = $request->min_long;
+     $max_long = $request->max_long;
      $offset = ($page-1)*$rows;
      $sql="select count(*) from propierties";
 
@@ -44,9 +50,8 @@ class PropiertiesController extends Controller
      $rs=mysqli_query($connection,$sql);
      $row=mysqli_fetch_row($rs);
      $result["total"]= $row[0];
-
-     if($search){
-       $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
+     if($search && $min_long == null && $max_long == null){
+                      $propierties = Propierty::orderBy($sort, $order)->with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
                       ->where('inventory_number','LIKE','%'.$search.'%')
                       ->orWhere('propierty_location','LIKE','%'.$search.'%')
                       ->orWhere('surface','LIKE','%'.$search.'%')
@@ -68,8 +73,14 @@ class PropiertiesController extends Controller
                       ->orwhereHas('support_document', function ($query) use($search) {
                         $query->where('support_document', 'like', '%'.$search.'%');
                       })->skip($offset)->take($rows)->get();
-      }else {
-        $propierties = Propierty::with(['use_type','owner','adquisition_shape','propierty_description','support_document'])->skip($offset)->take($rows)->get();
+      }elseif ($min_long != null &&  $max_long != null) {
+        $propierties = Propierty::orderBy($sort, $order)->with(['use_type','owner','adquisition_shape','propierty_description','support_document'])
+                      ->whereBetween('surface',[$min_long, $max_long])
+                      ->skip($offset)->take($rows)->get();
+      }
+      else {
+
+        $propierties = Propierty::orderBy($sort, $order)->with(['use_type','owner','adquisition_shape','propierty_description','support_document'])->skip($offset)->take($rows)->get();
      }
      $items=array();
      foreach($propierties as $propierty){
@@ -103,6 +114,7 @@ class PropiertiesController extends Controller
     }
 
     public function save_propierties(Request $request){
+
       $propierty = new Propierty();
       $propierty->inventory_number = $request->inventory_number;
       $propierty->propierty_location = $request->propierty_location;
@@ -148,15 +160,17 @@ class PropiertiesController extends Controller
           $im->image=$name;
           $im->save();
         }
-      }if($request->pdf){
+      }if($request->pdfs){
         $destinationPath= public_path('documents');
-        $pdf =$request->file('pdf');
-        $name = $pdf->getClientOriginalName();
-        $pdf->move($destinationPath, $name);
-        $document = new PropiertyDocument();
-        $document->propierty_id = $propierty->id;
-        $document->document_name=$name;
-        $document->save();
+        $pdfs=$request->file('pdfs');
+        foreach ($pdfs as $key => $pdf) {
+          $name = $pdf->getClientOriginalName();
+          $pdf->move($destinationPath, $name);
+          $document = new PropiertyDocument();
+          $document->propierty_id = $propierty->id;
+          $document->document_name=$name;
+          $document->save();
+        }
         }
         $users = User::orderBy('id')->get();
         foreach ($users as $key => $user) {
@@ -193,15 +207,17 @@ class PropiertiesController extends Controller
           $im->save();
         }
       }
-      if ($request->pdf) {
+      if ($request->pdfs) {
           $destinationPath= public_path('documents');
-          $pdf =$request->file('pdf');
-          $name = $pdf->getClientOriginalName();
-          $pdf->move($destinationPath, $name);
-          $document = new PropiertyDocument();
-          $document->propierty_id = $id;
-          $document->document_name=$name;
-          $document->save();
+          $pdfs =$request->file('pdfs');
+          foreach ($pdfs as $key => $pdf) {
+            $name = $pdf->getClientOriginalName();
+            $pdf->move($destinationPath, $name);
+            $document = new PropiertyDocument();
+            $document->propierty_id = $propierty->id;
+            $document->document_name=$name;
+            $document->save();
+          }
       }
       echo json_encode(array('success'=>true));
   }
@@ -246,6 +262,55 @@ class PropiertiesController extends Controller
   public function search_propierties(Request $request){
 
     return view('propierties.search');
+  }
+
+  public function destroy_documents(Request $request){
+    if ($request) {
+      $ids = $request->ids;
+      for ($i=0; $i < sizeof($request->ids) ; $i++) {
+          $document = PropiertyDocument::find($ids[$i]);
+          $document->delete();
+      }
+      $notification = array(
+        'message' =>'Documentos eliminados correctamente',
+        'alert-type' => 'success'
+      );
+      return back()->with($notification);
+    }
+
+  }
+
+  public function destroy_images(Request $request){
+    if ($request) {
+      $ids = $request->img_ids;
+      for ($i=0; $i < sizeof($request->img_ids) ; $i++) {
+          $document = PropiertyImage::find($ids[$i]);
+          $document->delete();
+      }
+      $notification = array(
+        'message' =>'Imagenes eliminadas correctamente',
+        'alert-type' => 'success'
+      );
+      return back()->with($notification);
+    }
+  }
+
+  public function get_lat_long_coordinates(Request $request,$utm_coordinates){
+    if ($utm_coordinates) {
+      $utm_str=explode(';', $utm_coordinates);
+      $utm_str_lat = str_replace("x:","",$utm_str[0]);
+      $utm_str_lon = str_replace("y:","",$utm_str[1]);
+      $coordinates = new Coordinates();
+      $lat_lon = $coordinates->utm2ll($utm_str_lat,$utm_str_lon,14,true);
+      if($lat_lon) {
+        $lat_lon_arr=explode(',',$lat_lon);
+        $lat_coor = str_replace('"attr":{"lat":',"",$lat_lon_arr[1]);
+        $lon_str = str_replace('"lon":',"",$lat_lon_arr[2]);
+        $lon_coor = str_replace('}}',"",$lon_str);
+        $lat_lon_coor = $lat_coor.",".$lon_coor;
+        return json_encode($lat_lon_coor);
+      }
+    }
   }
 
 }
