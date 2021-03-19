@@ -440,7 +440,7 @@ $(document).ready(function(){
         console.log(response);
         $.each(response, function(index, value){
           ind = index+1;
-          $('#listd').append('<br><a href="http://127.0.0.1:8000/images/'+value.image+'" target="_blank">Imagen '+ind+'</a>');
+          $('#listd').append('<br><a href="http://201.150.252.130:81/images/'+value.image+'" target="_blank">Imagen '+ind+'</a>');
         });
       }
     });
@@ -453,7 +453,7 @@ $(document).ready(function(){
       url:"obtener_documentos/"+id,
       success:function(response){
         $.each(response, function(index, value){
-          $('#liste').append('<br><a href="http://127.0.0.1:8000/documents/'+value.document_name+'" target="_blank">Documento</a>');
+          $('#liste').append('<br><a href="http://201.150.252.130:81/documents/'+value.document_name+'" target="_blank">Documento</a>');
         });
       }
     });
