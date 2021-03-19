@@ -484,7 +484,7 @@ $(document).ready(function(){
           $('#exampleModal').modal('show');
           $.each(response, function(index, value){
             $('#documents_list').append('<li><input type="checkbox" id="'+index+'" name="ids[]" value="'+value.id+'"><label for="'+index+'">Documento: '+index+'</label></li>');
-            $('#documents_view').append('<li><a href="http://http://201.150.252.130:81/public/documents/'+value.document_name+'" target="_blank">Documento</a></li>');
+            $('#documents_view').append('<li><a href="http://201.150.252.130:81/public/documents/'+value.document_name+'" target="_blank">Documento</a></li>');
           });
       }
     }
