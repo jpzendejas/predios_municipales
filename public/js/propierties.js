@@ -452,7 +452,7 @@ $(document).ready(function(){
         console.log(response);
         $.each(response, function(index, value){
           ind = index+1;
-          $('#listd').append('<br><a href="http://201.150.252.130:81/images/'+value.image+'" target="_blank">Imagen '+ind+'</a>');
+          $('#listd').append('<br><a href="http://201.150.252.130:81/public/images/'+value.image+'" target="_blank">Imagen '+ind+'</a>');
         });
       }
     });
@@ -465,7 +465,7 @@ $(document).ready(function(){
       url:"obtener_documentos/"+id,
       success:function(response){
         $.each(response, function(index, value){
-          $('#liste').append('<br><a href="http://201.150.252.130:81/documents/'+value.document_name+'" target="_blank">Documento</a>');
+          $('#liste').append('<br><a href="http://201.150.252.130:81/public/documents/'+value.document_name+'" target="_blank">Documento</a>');
         });
       }
     });
@@ -484,7 +484,7 @@ $(document).ready(function(){
           $('#exampleModal').modal('show');
           $.each(response, function(index, value){
             $('#documents_list').append('<li><input type="checkbox" id="'+index+'" name="ids[]" value="'+value.id+'"><label for="'+index+'">Documento: '+index+'</label></li>');
-            $('#documents_view').append('<li><a href="http://salamanca.gob.mx/predios_municipales/public/documents/'+value.document_name+'" target="_blank">Documento</a></li>');
+            $('#documents_view').append('<li><a href="http://http://201.150.252.130:81/public/documents/'+value.document_name+'" target="_blank">Documento</a></li>');
           });
       }
     }
@@ -538,7 +538,7 @@ function get_modal_images(id){
           $('#exampleModalB').modal('show');
           $.each(response, function(index, value){
             $('#images_list').append('<li><input type="checkbox" id="'+index+'" name="img_ids[]" value="'+value.id+'"><label for="'+index+'">Imagen: '+index+'</label></li>');
-            $('#images_view').append('<li><a href="http://salamanca.gob.mx/predios_municipales/public/images/'+value.image+'" target="_blank">Imagen</a></li>');
+            $('#images_view').append('<li><a href="http://201.150.252.130:81/public/images/'+value.image+'" target="_blank">Imagen</a></li>');
           });
         }
     }
